@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'FucXed';
+    /*you can use these src urls or or upload on your own server and replace urls with your own. */
+    src: url('https://static1.squarespace.com/static/5bda9184c3c16a86b3c38cc5/t/5bdbad56c2241bcd3a123fd6/1541123414560/fucxedcaps-webfont.woff2') format('woff2'),
+url('https://static1.squarespace.com/static/5bda9184c3c16a86b3c38cc5/t/5bdbad426d2a73d30dcb3aad/1541123394903/fucxedcaps-webfont.woff') format('woff'),
+url('https://static1.squarespace.com/static/5bda9184c3c16a86b3c38cc5/t/5bdbad4cc2241bcd3a123f2c/1541123404942/fucxedcaps-webfont.otf') format('otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1, h2, h3 {
+	font-family: "FucXed", sans-serif;
+	text-transform: uppercase;
+}
