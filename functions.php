@@ -1,5 +1,15 @@
 <?php
 
+function img_src($src) {
+	$src = get_theme_file_uri("/img/$src");
+	echo $src;
+}
+
+function css_href($src) {
+	$src = get_theme_file_uri("/$src");
+	echo $src;
+}
+
 function xrcr_after_setup_theme() {
 	add_theme_support('html5', array(
 		'comment-list',
@@ -11,11 +21,6 @@ function xrcr_after_setup_theme() {
 	add_theme_support('title-tag');
 }
 add_action('after_setup_theme', 'xrcr_after_setup_theme');
-
-function img_src($src) {
-	$src = get_theme_file_uri("/img/$src");
-	echo $src;
-}
 
 function xrcr_enqueue() {
 	wp_enqueue_script(
