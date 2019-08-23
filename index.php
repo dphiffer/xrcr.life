@@ -13,6 +13,8 @@
 				<img src="<?php img_src('xr-logo.png'); ?>" alt="Extinction Rebellion" class="logo">
 				Capital Region
 			</a>
+			<a href="https://www.instagram.com/extinctionrebellion.cr/">Instagram</a>
+			<a href="https://www.facebook.com/extinctionrebellion.cr/">Facebook</a>
 		</nav>
 		<header>
 			<div class="container">
