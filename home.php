@@ -69,7 +69,7 @@ Template Name: Home
 				array(
 					'key' => 'time',
 					'compare' => '>=',
-					'value' => date("Y-m-d H:i:s")
+					'value' => current_time("Y-m-d H:i:s")
 				)
 			)
 		));
