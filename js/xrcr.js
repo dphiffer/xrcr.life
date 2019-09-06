@@ -1,4 +1,6 @@
 var colors;
+var limit = 0;
+var grid = [];
 
 function setup() {
 	var w = $('#canvas').width();
@@ -22,9 +24,45 @@ function setup() {
 	};
 	background(colors.lemon);
 	fill(colors.lemon);
+	frameRate(50);
+
+	var logo_colors = [
+		'red',
+		'pink',
+		'warm_yellow',
+		'light_green',
+		'green',
+		'light_blue',
+		'dark_blue',
+		'angry',
+		'bright_pink'
+	];
+	var count = 0;
+	for (var x = 45; x < $('#canvas').width(); x += 85) {
+		for (var y = 45; y < $('#canvas').height(); y += 85) {
+			grid.push({
+				x: x,
+				y: y,
+				color: logo_colors[count % logo_colors.length]
+			});
+			count++;
+		}
+	}
+	grid = shuffle(grid);
 }
 
-function xr(x, y, color) {
+function shuffle(a) {
+	var j, x, i;
+	for (i = a.length - 1; i > 0; i--) {
+		j = Math.floor(Math.random() * (i + 1));
+		x = a[i];
+		a[i] = a[j];
+		a[j] = x;
+	}
+	return a;
+}
+
+function xr_logo(x, y, color) {
 	stroke(color);
 	var r = 75;
 	var x1 = x - r * 0.30;
@@ -39,25 +77,14 @@ function xr(x, y, color) {
 }
 
 function draw() {
-	var logo_colors = [
-		'red',
-		'pink',
-		'warm_yellow',
-		'light_green',
-		'green',
-		'light_blue',
-		'dark_blue',
-		'angry',
-		'bright_pink'
-	];
-	var count = 0;
-	var color;
-	for (var y = 45; y < $('#canvas').height(); y += 85) {
-		for (var x = 45; x < $('#canvas').width(); x += 85) {
-			color = logo_colors[count % logo_colors.length];
-			xr(x, y, colors[color]);
-			count++;
-		}
+	limit += 2;
+	if (limit > grid.length) {
+		limit = grid.length;
+	}
+	var logo;
+	for (var i = 0; i < limit; i++) {
+		logo = grid[i];
+		xr_logo(logo.x, logo.y, colors[logo.color]);
 	}
 }
 
