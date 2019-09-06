@@ -24,5 +24,6 @@
 			<div class="social">
 				<a href="https://www.instagram.com/extinctionrebellion.cr/"><i class="fab fa-instagram"></i></a>
 				<a href="https://www.facebook.com/extinctionrebellion.cr/"><i class="fab fa-facebook-f"></i></a>
+				<a href="https://twitter.com/_XRCR"><i class="fab fa-twitter"></i></a>
 			</div>
 		</nav>
