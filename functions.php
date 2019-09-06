@@ -10,6 +10,11 @@ function css_href($src) {
 	echo $src;
 }
 
+function js_src($src) {
+	$src = get_theme_file_uri("/js/$src");
+	echo $src;
+}
+
 function xrcr_after_setup_theme() {
 	add_theme_support('html5', array(
 		'comment-list',
@@ -27,17 +32,6 @@ function xrcr_init() {
 		'public' => false
 	));
 }
-
-function xrcr_enqueue() {
-	wp_enqueue_script(
-		'xrcr',
-		get_theme_file_uri('js/xrcr.js'),
-		array('jquery'),
-		'1',
-		true
-	);
-}
-add_action('wp_enqueue_scripts', 'xrcr_enqueue');
 
 function xrcr_join() {
 

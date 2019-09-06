@@ -10,15 +10,17 @@
 	<body>
 		<nav>
 			<a href="/" class="identity">
-				<img src="<?php img_src('xr-logo.png'); ?>" alt="Extinction Rebellion" class="logo">
-				Capital Region
+				XR Capital Region
 			</a>
-			<a href="https://www.instagram.com/extinctionrebellion.cr/">Instagram</a>
-			<a href="https://www.facebook.com/extinctionrebellion.cr/">Facebook</a>
+			<div class="social">
+				<a href="https://www.instagram.com/extinctionrebellion.cr/"><i class="fab fa-instagram"></i></a>
+				<a href="https://www.facebook.com/extinctionrebellion.cr/"><i class="fab fa-facebook-f"></i></a>
+			</div>
 		</nav>
 		<header>
+			<div id="canvas"></div>
 			<div class="container">
-				<h1>Rebel For Life</h1>
+				<h1><span>Rebel For Life</span></h1>
 			</div>
 		</header>
 		<div class="container">
@@ -54,5 +56,8 @@
 			</form>
 		</div>
 		<?php wp_footer(); ?>
+		<script src="<?php js_src('jquery.min.js'); ?>"></script>
+		<script src="<?php js_src('p5.min.js'); ?>"></script>
+		<script src="<?php js_src('xrcr.js'); ?>"></script>
 	</body>
 </html>

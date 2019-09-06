@@ -112,6 +112,17 @@ h1 {
 	margin: 120px 0;
 }
 
+header h1 {
+	position: absolute;
+	line-height: 1em;
+}
+
+header h1 span {
+	padding-top: 10px;
+	display: inline-block;
+	background: rgba(247, 238, 106, 0.8);
+}
+
 h2 {
 	font-size: 48px;
 	line-height: 1.1em;
@@ -119,8 +130,6 @@ h2 {
 }
 
 nav {
-	color: #fff;
-	background: #000;
 	padding: 20px;
 }
 
@@ -161,9 +170,10 @@ form .buttons {
 }
 
 header {
-	background: #12AA38;
 	padding: 40px 0;
 	position: relative;
+	height: 435px;
+	background: rgb(247, 238, 106);
 }
 
 .container {
@@ -172,25 +182,41 @@ header {
 	margin: 0 auto;
 }
 
-.logo {
-	width: 180px;
-	height: auto;
-	vertical-align: bottom;
-}
-
 .joined {
 	margin: 20px 0;
 	padding: 20px;
 	background: #F7EE6A;
 }
 
+nav {
+	position: relative;
+	padding-top: 30px;
+}
+
 nav a {
+	color: #000;
 	font-family: "FucXed", sans-serif;
 	font-size: 24px;
 	text-transform: uppercase;
-	color: #fff;
 	text-decoration: none;
 	margin-right: 20px;
+}
+
+nav .social {
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+}
+
+nav .social a {
+	background: rgba(0, 0, 0, 0.1);
+	height: 40px;
+	width: 40px;
+	border-radius: 40px;
+	text-align: center;
+	line-height: 43px;
+	display: inline-block;
+	margin-right: 10px;
 }
 
 .identity {
@@ -199,6 +225,14 @@ nav a {
 
 .clear {
 	clear: both;
+}
+
+#canvas {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
 }
 
 @media screen and (min-width: 760px) {
