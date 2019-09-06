@@ -18,7 +18,7 @@ Template Name: Home
 		<p>We are facing an unprecedented global emergency. Life on Earth is in crisis: scientists agree we have entered a period of abrupt climate breakdown, and we are in the midst of a mass extinction of our own making.</p>
 		<div class="cta">
 			<a href="https://www.youtube.com/watch?v=n__y1FXK_jE" class="button">Watch The talk <i class="fab fa-youtube"></i></a>
-			<p><i>Heading for Extinction and what to do about it.</i></p>
+			<p><i>Heading for Extinction<br>(And what to do about it)</i></p>
 		</div>
 	</div>
 </div>

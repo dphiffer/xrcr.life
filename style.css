@@ -245,6 +245,7 @@ nav .social {
 	position: absolute;
 	right: 20px;
 	bottom: 20px;
+	display: none;
 }
 
 nav .social a {
@@ -281,6 +282,9 @@ nav .social a {
 
 #about .logo {
 	margin-bottom: 20px;
+	width: 100%;
+	height: auto;
+	max-width: 300px;
 }
 
 #about .button {
@@ -326,6 +330,14 @@ footer .social {
 footer .social i {
 	width: 20px;
 	margin-right: 10px;
+}
+
+@media screen and (min-width: 480px) {
+
+	nav .social {
+		display: block;
+	}
+
 }
 
 @media screen and (min-width: 760px) {
