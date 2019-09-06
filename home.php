@@ -62,12 +62,12 @@ Template Name: Home
 		$query = new WP_Query(array(
 			'post_type' => 'event',
 			'posts_per_page' => 3,
-			'meta_key' => 'event_time',
+			'meta_key' => 'time',
 			'orderby' => 'meta_value',
 			'order' => 'ASC',
 			'meta_query' => array(
 				array(
-					'key' => 'event_time',
+					'key' => 'time',
 					'compare' => '>=',
 					'value' => date("Y-m-d H:i:s")
 				)
@@ -80,9 +80,9 @@ Template Name: Home
 			?>
 			<h4 class="time">
 				<i class="fa fa-calendar"></i>
-				<?php the_field('event_time'); ?>
+				<?php the_field('time'); ?>
 			</h4>
-			<h3><a href="<?php the_field('facebook_link'); ?>"><?php the_title(); ?></a></h3>
+			<h3><a href="<?php the_field('link'); ?>"><?php the_title(); ?></a></h3>
 			<div class="location">
 				<i class="fa fa-map-pin"></i>
 				<?php the_field('location'); ?>

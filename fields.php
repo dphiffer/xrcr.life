@@ -8,8 +8,8 @@ acf_add_local_field_group(array(
 	'fields' => array(
 		array(
 			'key' => 'field_5d728dbb292b3',
-			'label' => 'Event Time',
-			'name' => 'event_time',
+			'label' => 'Time',
+			'name' => 'time',
 			'type' => 'date_time_picker',
 			'instructions' => '',
 			'required' => 0,
@@ -44,8 +44,8 @@ acf_add_local_field_group(array(
 		),
 		array(
 			'key' => 'field_5d7291a3c2174',
-			'label' => 'Facebook Link',
-			'name' => 'facebook_link',
+			'label' => 'Link',
+			'name' => 'link',
 			'type' => 'text',
 			'instructions' => '',
 			'required' => 0,

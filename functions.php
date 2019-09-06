@@ -64,7 +64,7 @@ function xrcr_init() {
 		'has_archive'        => false,
 		'hierarchical'       => false,
 		'menu_position'      => 2,
-		'supports'           => array('title', 'editor')
+		'supports'           => array('title')
 	);
 	register_post_type('event', $args);
 
