@@ -301,6 +301,10 @@ nav .social a {
 	margin-bottom: 40px;
 }
 
+.event h3 {
+	line-height: 1.33em;
+}
+
 .event .time {
 	margin-bottom: 10px;
 }
