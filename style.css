@@ -101,7 +101,7 @@ body {
 	font-family: 'Crimson Text', serif;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
 	font-family: "FucXed", sans-serif;
 	text-transform: uppercase;
 }
@@ -109,24 +109,57 @@ h1, h2, h3 {
 h1 {
 	font-size: 72px;
 	line-height: 1.1em;
-	margin: 120px 0;
+}
+
+em, i {
+	font-style: italic;
+}
+
+a {
+	color: #000;
+}
+
+strong, b {
+	font-weight: bold;
 }
 
 header h1 {
 	position: absolute;
-	line-height: 1em;
+	text-align: center;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-60%);
 }
 
 header h1 span {
-	padding-top: 10px;
+	background: rgba(247, 238, 106, 0.9);
 	display: inline-block;
-	background: rgba(247, 238, 106, 0.8);
+	line-height: 50px;
+}
+
+header h1 .small {
+	font-size: 0.8em;
+	transform: translateY(25px);
+}
+
+header h1 .smaller {
+	font-size: 0.6em;
+}
+
+header h1 .larger {
+	font-size: 1.5em;
+	transform: translateY(25px);
 }
 
 h2 {
 	font-size: 48px;
 	line-height: 1.1em;
 	margin: 20px 0;
+}
+
+h3 {
+	font-size: 36px;
+	line-height: 1.1em;
 }
 
 nav {
@@ -147,9 +180,10 @@ input[type="text"] {
 	background: #dedede;
 }
 
-input[type="submit"] {
+input[type="submit"],
+.button {
 	width: 290px;
-	line-height: 42px;
+	line-height: 48px;
 	background: #000;
 	color: #fff;
 	text-align: center;
@@ -159,6 +193,7 @@ input[type="submit"] {
 	border: none;
 	display: block;
 	cursor: pointer;
+	text-decoration: none;
 }
 
 form {
@@ -186,6 +221,10 @@ header {
 	margin: 20px 0;
 	padding: 20px;
 	background: #F7EE6A;
+}
+
+.cta {
+	padding: 20px 0;
 }
 
 nav {
@@ -233,6 +272,60 @@ nav .social a {
 	right: 0;
 	top: 0;
 	bottom: 0;
+}
+
+#about {
+	background: rgb(117, 208, 241);
+	padding: 20px 0;
+}
+
+#about .logo {
+	margin-bottom: 20px;
+}
+
+#about .button {
+	margin-bottom: 10px;
+}
+
+#events {
+	background: rgb(237, 155, 196);
+	padding: 20px 0;
+}
+
+.event {
+	margin-bottom: 40px;
+}
+
+.event .time {
+	margin-bottom: 10px;
+}
+
+.event .location {
+	margin-top: 20px;
+}
+
+footer {
+	color: #fff;
+	background: rgb(56, 96, 170);
+	padding: 40px 0 80px;
+	font-size: 1.2em;
+}
+
+footer a {
+	color: #fff;
+}
+
+footer li {
+	margin-bottom: 10px;
+}
+
+footer .social {
+	margin-top: 40px;
+}
+
+footer .social i {
+	width: 20px;
+	margin-right: 10px;
 }
 
 @media screen and (min-width: 760px) {

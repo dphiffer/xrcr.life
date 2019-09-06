@@ -1,5 +1,9 @@
 <?php
 
+if (defined('ACF_LITE') && ACF_LITE) {
+	require_once __DIR__ . '/fields.php';
+}
+
 function img_src($src) {
 	$src = get_theme_file_uri("/img/$src");
 	echo $src;
@@ -31,7 +35,42 @@ function xrcr_init() {
 	register_post_type('contact', array(
 		'public' => false
 	));
+	$labels = array(
+		'name'               => 'Events',
+		'singular_name'      => 'Event',
+		'menu_name'          => 'Calendar',
+		'name_admin_bar'     => 'Calendar',
+		'add_new'            => 'Add New',
+		'add_new_item'       => 'Add New Event',
+		'new_item'           => 'New Calendar Event',
+		'edit_item'          => 'Edit Calendar Event',
+		'view_item'          => 'View Calendar Event',
+		'all_items'          => 'All Calendar Events',
+		'search_items'       => 'Search Calendar Events',
+		'parent_item_colon'  => 'Parent Calendar Events:',
+		'not_found'          => 'No Calendar Events found.',
+		'not_found_in_trash' => 'No Calendar Events found in Trash.',
+	);
+	$args = array(
+		'labels'             => $labels,
+		'description'        => 'Calendar Events',
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'query_var'          => true,
+		'rewrite'            => array('slug' => 'event'),
+		'capability_type'    => 'post',
+		'has_archive'        => false,
+		'hierarchical'       => false,
+		'menu_position'      => 2,
+		'supports'           => array('title', 'editor')
+	);
+	register_post_type('event', $args);
+
+	register_nav_menu('footer-menu', 'Footer');
 }
+add_action('init', 'xrcr_init');
 
 function xrcr_join() {
 

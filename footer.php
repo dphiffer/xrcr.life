@@ -1,0 +1,20 @@
+		<footer>
+			<div class="container">
+				<?php wp_nav_menu(array(
+					'theme_location' => 'footer-menu'
+				)); ?>
+				<ul class="social">
+					<li><a href="mailto:info@xrcr.life"><i class="fa fa-envelope"></i>Contact us</a></li>
+					<li><a href="https://www.instagram.com/extinctionrebellion.cr/"><i class="fab fa-instagram"></i>XRCR on Instagram</a>
+					</li>
+					<li><a href="https://www.facebook.com/extinctionrebellion.cr/"><i class="fab fa-facebook-square"></i>XRCR on Facebook</a>
+					</li>
+				</ul>
+			</div>
+		</footer>
+		<?php wp_footer(); ?>
+		<script src="<?php js_src('jquery.min.js'); ?>"></script>
+		<script src="<?php js_src('p5.min.js'); ?>"></script>
+		<script src="<?php js_src('xrcr.js'); ?>"></script>
+	</body>
+</html>
