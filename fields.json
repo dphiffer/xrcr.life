@@ -16,9 +16,9 @@
                     "class": "",
                     "id": ""
                 },
-                "display_format": "d\/m\/Y g:i a",
-                "return_format": "d\/m\/Y g:i a",
-                "first_day": 1
+                "display_format": "F j, Y g:i a",
+                "return_format": "F j, Y g:i a",
+                "first_day": 0
             },
             {
                 "key": "field_5d728df5292b4",
@@ -38,6 +38,25 @@
                 "maxlength": "",
                 "rows": "",
                 "new_lines": "br"
+            },
+            {
+                "key": "field_5d7291a3c2174",
+                "label": "Facebook Link",
+                "name": "facebook_link",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
             }
         ],
         "location": [
