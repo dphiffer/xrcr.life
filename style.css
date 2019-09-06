@@ -194,6 +194,12 @@ input[type="submit"],
 	display: block;
 	cursor: pointer;
 	text-decoration: none;
+	padding-top: 3px;
+}
+
+input[type="submit"]:hover,
+.button:hover {
+	opacity: 0.9;
 }
 
 form {
