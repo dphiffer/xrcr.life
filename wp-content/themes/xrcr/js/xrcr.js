@@ -24,7 +24,7 @@ function setup() {
 	};
 	background(colors.lemon);
 	fill(colors.lemon);
-	frameRate(50);
+	frameRate(30);
 
 	var logo_colors = [
 		'red',
