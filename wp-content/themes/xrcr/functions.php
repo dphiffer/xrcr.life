@@ -32,42 +32,7 @@ function xrcr_after_setup_theme() {
 add_action('after_setup_theme', 'xrcr_after_setup_theme');
 
 function xrcr_init() {
-	register_post_type('contact', array(
-		'public' => false
-	));
-	$labels = array(
-		'name'               => 'Events',
-		'singular_name'      => 'Event',
-		'menu_name'          => 'Calendar',
-		'name_admin_bar'     => 'Calendar',
-		'add_new'            => 'Add New',
-		'add_new_item'       => 'Add New Event',
-		'new_item'           => 'New Calendar Event',
-		'edit_item'          => 'Edit Calendar Event',
-		'view_item'          => 'View Calendar Event',
-		'all_items'          => 'All Calendar Events',
-		'search_items'       => 'Search Calendar Events',
-		'parent_item_colon'  => 'Parent Calendar Events:',
-		'not_found'          => 'No Calendar Events found.',
-		'not_found_in_trash' => 'No Calendar Events found in Trash.',
-	);
-	$args = array(
-		'labels'             => $labels,
-		'description'        => 'Calendar Events',
-		'public'             => true,
-		'publicly_queryable' => true,
-		'show_ui'            => true,
-		'show_in_menu'       => true,
-		'query_var'          => true,
-		'rewrite'            => array('slug' => 'event'),
-		'capability_type'    => 'post',
-		'has_archive'        => false,
-		'hierarchical'       => false,
-		'menu_position'      => 2,
-		'supports'           => array('title')
-	);
-	register_post_type('event', $args);
-
+	require_once __DIR__ . '/post-types.php';
 	register_nav_menu('footer-menu', 'Footer');
 }
 add_action('init', 'xrcr_init');
@@ -84,12 +49,14 @@ function xrcr_join() {
 	if (! empty($_POST['email'])) {
 		$post_id = wp_insert_post(array(
 			'post_type' => 'contact',
-			'post_title' => $_POST['email']
+			'post_title' => "{$_POST['last_name']}, {$_POST['first_name']}",
+			'post_status' => 'publish'
 		));
 		update_post_meta($post_id, 'first_name', $_POST['first_name']);
 		update_post_meta($post_id, 'last_name', $_POST['last_name']);
 		update_post_meta($post_id, 'phone', $_POST['phone']);
 		update_post_meta($post_id, 'zip', $_POST['zip']);
+		update_post_meta($post_id, 'email', $_POST['email']);
 	}
 
 	wp_redirect('/?join=1#join');
