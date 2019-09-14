@@ -68,23 +68,43 @@ add_action('wp_ajax_nopriv_xrcr_join', 'xrcr_join');
 function xrcr_export() {
 	$posts = get_posts(array(
 		'post_type' => 'contact',
-		'posts_per_page' => -1,
-		'post_status' => 'any'
+		'posts_per_page' => -1
 	));
 	$fh = fopen('php://stdout', 'w');
-	fputcsv($fh, array(
+
+	$fields = array(
+		'id',
 		'email',
 		'first_name',
 		'last_name',
 		'phone',
-		'zip'
-	));
+		'zip',
+		'house_meeting_host',
+		'willing_arrest',
+		'action_volunteer',
+		'art_volunteer',
+		'outreach_volunteer',
+		'action_circle',
+		'regen_circle',
+		'media_circle',
+		'infra_circle',
+		'skills',
+		'reference',
+		'feedback',
+		'oct_7_nyc',
+		'input_notes'
+	);
+
+	fputcsv($fh, $fields);
+
 	foreach ($posts as $post) {
-		$row = array($post->post_title);
-		$row[] = get_post_meta($post->ID, 'first_name', true);
-		$row[] = get_post_meta($post->ID, 'last_name', true);
-		$row[] = get_post_meta($post->ID, 'phone', true);
-		$row[] = get_post_meta($post->ID, 'zip', true);
+		$row = array($post->ID);
+		foreach ($fields as $field) {
+			if ($field == 'id') {
+				continue;
+			}
+			$row[] = get_field($field, $post->ID);
+		}
 		fputcsv($fh, $row);
 	}
 	fclose($fh);
