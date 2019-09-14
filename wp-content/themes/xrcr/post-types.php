@@ -29,7 +29,7 @@ $args = array(
 	'hierarchical'       => true,
 	'menu_position'      => 5,
 	'menu_icon'          => 'dashicons-admin-users',
-	'supports'           => array('title', 'revisions')
+	'supports'           => array('revisions')
 );
 register_post_type('contact', $args);
 

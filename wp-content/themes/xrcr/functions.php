@@ -37,6 +37,26 @@ function xrcr_init() {
 }
 add_action('init', 'xrcr_init');
 
+function xrcr_contact_title($post_id) {
+
+	$post_type = get_post_type($post_id);
+	if ($post_type != 'contact') {
+		return;
+	}
+
+	// Avoid infinite loops
+	remove_action('save_post', 'xrcr_contact_title');
+
+	$first_name = get_field('first_name', $post_id);
+	$last_name = get_field('last_name', $post_id);
+
+	wp_update_post(array(
+		'ID' => $post_id,
+		'post_title' => "$last_name, $first_name"
+	));
+}
+add_action('save_post', 'xrcr_contact_title');
+
 function xrcr_join() {
 
 	$to = 'info@xrcr.life';
