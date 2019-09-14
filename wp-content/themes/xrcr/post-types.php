@@ -26,12 +26,35 @@ $args = array(
 	'query_var'          => false,
 	'capability_type'    => 'post',
 	'has_archive'        => true,
-	'hierarchical'       => false,
+	'hierarchical'       => true,
 	'menu_position'      => 5,
 	'menu_icon'          => 'dashicons-admin-users',
 	'supports'           => array('title', 'revisions')
 );
 register_post_type('contact', $args);
+
+$labels = array(
+	'name'              => 'Attended',
+	'singular_name'     => 'Attended',
+	'search_items'      => 'Search Attended',
+	'all_items'         => 'All Events Attended',
+	'parent_item'       => 'Parent Event',
+	'parent_item_colon' => 'Parent Event:',
+	'edit_item'         => 'Edit Event Attended',
+	'update_item'       => 'Update Event Attended',
+	'add_new_item'      => 'Add New Event Attended',
+	'new_item_name'     => 'New Event Attended Name',
+	'menu_name'         => 'Attended',
+);
+$args = array(
+	'hierarchical'      => true,
+	'labels'            => $labels,
+	'show_ui'           => true,
+	'show_admin_column' => true,
+	'public'            => false,
+	'query_var'         => false
+);
+register_taxonomy('attended', array('contact'), $args);
 
 $labels = array(
 	'name'               => 'Events',
