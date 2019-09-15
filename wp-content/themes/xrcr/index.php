@@ -1,6 +1,10 @@
-<?php
+<?php get_header(); ?>
 
-get_header();
+<header class="mini">
+	<div id="canvas"></div>
+</header>
+
+<?php
 
 while (have_posts()) {
 	the_post();
