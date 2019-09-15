@@ -162,6 +162,10 @@ h3 {
 	line-height: 1.1em;
 }
 
+p {
+	margin-bottom: 1em;
+}
+
 nav {
 	padding: 20px;
 }
@@ -210,6 +214,10 @@ header {
 	position: relative;
 	height: 435px;
 	background: rgb(247, 238, 106);
+}
+
+header.mini {
+	height: 175px;
 }
 
 .container {
@@ -345,6 +353,10 @@ footer .social i {
 
 	nav .social {
 		display: block;
+	}
+
+	header.mini {
+		height: 260px;
 	}
 
 }
