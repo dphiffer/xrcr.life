@@ -123,6 +123,24 @@ strong, b {
 	font-weight: bold;
 }
 
+figure.wide {
+	position: relative;
+	width: calc(100% + 30px);
+	margin-left: -15px;
+	margin-right: -15px;
+	height: 300px;
+	overflow: hidden;
+	max-width: 100vw;
+}
+
+figure.wide img {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
 header h1 {
 	position: absolute;
 	text-align: center;
@@ -377,6 +395,16 @@ footer .social i {
 
 	form .buttons {
 		clear: both;
+	}
+
+	figure.wide {
+		position: relative;
+		width: 150%;
+		margin-left: -25%;
+		margin-right: -25%;
+		height: 500px;
+		max-width: 100vw;
+		overflow: hidden;
 	}
 
 }
