@@ -17,4 +17,5 @@ while (have_posts()) {
 	echo '</div>';
 }
 
+get_template_part('join-form');
 get_footer();

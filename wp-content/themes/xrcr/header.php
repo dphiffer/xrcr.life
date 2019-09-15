@@ -16,7 +16,7 @@
 		<meta name="twitter:image" content="https://xrcr.life/wp-content/themes/xrcr/img/twitter.jpg">
 		<?php wp_head(); ?>
 	</head>
-	<body>
+	<body <?php body_class(); ?>>
 		<nav>
 			<a href="/" class="identity">
 				XR Capital Region

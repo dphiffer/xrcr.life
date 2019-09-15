@@ -181,7 +181,6 @@ input[type="text"] {
 	width: 290px;
 	font-size: 18px;
 	border: none;
-	background: #dedede;
 }
 
 input[type="submit"],
@@ -226,7 +225,7 @@ header.mini {
 	margin: 0 auto;
 }
 
-.joined {
+.joined, #join-feedback {
 	margin: 20px 0;
 	padding: 20px;
 	background: #F7EE6A;
@@ -234,6 +233,10 @@ header.mini {
 
 .cta {
 	padding: 20px 0;
+}
+
+.hidden {
+	display: none;
 }
 
 nav {
@@ -274,6 +277,10 @@ nav .social a {
 
 .clear {
 	clear: both;
+}
+
+#join {
+	background: rgb(190, 210, 118);
 }
 
 #canvas {

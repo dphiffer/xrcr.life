@@ -59,27 +59,61 @@ add_action('save_post', 'xrcr_contact_title');
 
 function xrcr_join() {
 
-	$to = 'info@xrcr.life';
-	$subject = 'XRCR join submission';
-	$message = print_r($_POST, true);
+	$redirect_path = isset($_POST['redirect']) ? $_POST['redirect'] : '/';
+	if (substr($redirect_path, 0, 1) != '/') {
+		$redirect_path = '/';
+	}
+	if (strpos($redirect_path, '?') === false) {
+		$redirect_path = "$redirect_path?join=1#join";
+	} else {
+		$redirect_path = "$redirect_path&join=1#join";
+	}
+	$redirect = get_site_url() . $redirect_path;
+
 	if ($_SERVER['HTTP_HOST'] != 'local.xrcr.life') {
+		$to = 'info@xrcr.life';
+		$subject = 'XRCR join submission';
+		$message = print_r($_POST, true);
 		wp_mail($to, $subject, $message);
 	}
 
+	$saved = false;
 	if (! empty($_POST['email'])) {
 		$post_id = wp_insert_post(array(
 			'post_type' => 'contact',
-			'post_title' => "{$_POST['last_name']}, {$_POST['first_name']}",
-			'post_status' => 'publish'
+			'post_status' => 'draft'
 		));
-		update_post_meta($post_id, 'first_name', $_POST['first_name']);
-		update_post_meta($post_id, 'last_name', $_POST['last_name']);
-		update_post_meta($post_id, 'phone', $_POST['phone']);
-		update_post_meta($post_id, 'zip', $_POST['zip']);
-		update_post_meta($post_id, 'email', $_POST['email']);
+		if (! empty($post_id)) {
+			update_post_meta($post_id, 'first_name', $_POST['first_name']);
+			update_post_meta($post_id, 'last_name', $_POST['last_name']);
+			update_post_meta($post_id, 'phone', $_POST['phone']);
+			update_post_meta($post_id, 'zip', $_POST['zip']);
+			update_post_meta($post_id, 'email', $_POST['email']);
+			wp_update_post(array(
+				'ID' => $post_id,
+				'post_title' => "{$_POST['last_name']}, {$_POST['first_name']}"
+			));
+			$saved = true;
+		}
 	}
 
-	wp_redirect('/?join=1#join');
+	if (! empty($_POST['ajax'])) {
+		header('Content-Type: application/json');
+		if ($saved) {
+			echo json_encode(array(
+				'ok' => 1,
+				'feedback' => 'Thank you for signing up!'
+			));
+		} else {
+			echo json_encode(array(
+				'ok' => 0,
+				'feedback' => 'There was a problem with saving your submission.'
+			));
+		}
+	} else {
+		wp_redirect($redirect);
+	}
+
 	exit;
 }
 add_action('wp_ajax_xrcr_join', 'xrcr_join');

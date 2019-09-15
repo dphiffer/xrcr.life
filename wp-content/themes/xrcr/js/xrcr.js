@@ -3,6 +3,9 @@ var limit = 0;
 var grid = [];
 
 function setup() {
+	if ($('#canvas').length == 0) {
+		return;
+	}
 	var w = $('#canvas').width();
 	var h = $('#canvas').height();
 	var canvas = createCanvas(w, h);
@@ -89,3 +92,31 @@ function draw() {
 }
 
 $(window).resize(setup);
+
+function setup_join_form() {
+	if ($('#join form').length == 0) {
+		return;
+	}
+	$('#join form').submit(function(e) {
+		e.preventDefault();
+		$('#join-feedback').removeClass('hidden');
+		$('#join-feedback').html('Sending your details...');
+
+		var values = $(this).serialize() + '&ajax=1';
+		$.post('/wp-admin/admin-ajax.php?action=xrcr_join', values, function(rsp) {
+			if (rsp && rsp.ok) {
+				$('#join-feedback').html(rsp.feedback);
+				var h = $('#join .form-step1').height();
+				$('#join .form-step1').height(h);
+				$('#join .form-step1').css('opacity', 1);
+				$('#join .form-step1').hide(500);
+			} else {
+				$('#join-feedback').html('Oops, there was a problem saving your details.');
+			}
+		});
+	});
+}
+
+$(document).ready(function() {
+	setup_join_form();
+});
