@@ -238,6 +238,10 @@ header.mini {
 	height: 175px;
 }
 
+header.image-bg {
+	background-size: cover;
+}
+
 .container {
 	padding: 15px;
 	max-width: 730px;
