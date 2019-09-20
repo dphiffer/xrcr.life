@@ -24,10 +24,27 @@ if (has_post_thumbnail($post->ID)) {
 <?php
 
 }
-echo '<div class="container">';
-echo '<h2>' . get_the_title() . '</h2>';
+
+$cta_content = get_field('cta_content');
+$container_class = 'container';
+
+if (! empty($cta_content)) {
+	$container_class .= ' has-cta';
+}
+
+echo "<div class=\"$container_class\">\n";
+
+if (! empty($cta_content)) {
+	echo "<div class=\"cta\">$cta_content</div>\n";
+	echo "<div class=\"main\">\n";
+}
 
 the_content();
+
+if (! empty($cta_content)) {
+	echo "</div>\n";
+	echo "<br class=\"clear\">\n";
+}
 
 echo '</div>';
 

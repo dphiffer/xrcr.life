@@ -111,16 +111,33 @@ h1 {
 	line-height: 1.1em;
 }
 
-em, i {
-	font-style: italic;
-}
-
 a {
 	color: #000;
 }
 
+em, i {
+	font-style: italic;
+}
+
 strong, b {
 	font-weight: bold;
+}
+
+ol > li {
+	list-style: decimal;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+li {
+	margin-left: 1em;
+	margin-bottom: 1em;
+}
+
+li:last-child {
+	margin-bottom: 0;
 }
 
 figure.wide {
@@ -255,7 +272,11 @@ header.image-bg {
 }
 
 .cta {
-	padding: 20px 0;
+	font-size: 110%;
+	line-height: 1.33em;
+	padding: 25px;
+	background: rgb(20, 170, 55);
+	margin-bottom: 40px;
 }
 
 .hidden {
@@ -421,6 +442,22 @@ footer .social i {
 
 	form .buttons {
 		clear: both;
+	}
+
+	.container.has-cta {
+		width: 100%;
+		max-width: 1095px;
+		margin-top: 40px;
+	}
+
+	.container > .cta {
+		float: right;
+		width: calc(40% - 10px);
+	}
+
+	.container > .main {
+		float: left;
+		width: calc(60% - 10px);
 	}
 
 }
