@@ -462,6 +462,10 @@ footer .social i {
 		line-height: 1.33em;
 	}
 
+	.container.has-cta > .main p {
+		margin-bottom: 30px;
+	}
+
 }
 
 @media screen and (min-width: 1095px) {
