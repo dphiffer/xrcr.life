@@ -3,6 +3,56 @@
 if( function_exists('acf_add_local_field_group') ):
 
 acf_add_local_field_group(array(
+	'key' => 'group_5d84286f4aeef',
+	'title' => 'Call To Action',
+	'fields' => array(
+		array(
+			'key' => 'field_5d842876356fc',
+			'label' => 'Sidebar content',
+			'name' => 'cta_content',
+			'type' => 'wysiwyg',
+			'instructions' => 'Call to action will appear on the right of the main content.',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'tabs' => 'all',
+			'toolbar' => 'full',
+			'media_upload' => 1,
+			'delay' => 0,
+		),
+	),
+	'location' => array(
+		array(
+			array(
+				'param' => 'post_type',
+				'operator' => '==',
+				'value' => 'post',
+			),
+		),
+		array(
+			array(
+				'param' => 'post_type',
+				'operator' => '==',
+				'value' => 'page',
+			),
+		),
+	),
+	'menu_order' => 0,
+	'position' => 'normal',
+	'style' => 'default',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+	'active' => true,
+	'description' => '',
+));
+
+acf_add_local_field_group(array(
 	'key' => 'group_5d7c541492715',
 	'title' => 'Contact Details',
 	'fields' => array(
