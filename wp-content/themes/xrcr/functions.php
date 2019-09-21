@@ -1,5 +1,9 @@
 <?php
 
+if (function_exists('acf_add_options_page')) {
+	acf_add_options_page();
+}
+
 if (defined('ACF_LITE') && ACF_LITE) {
 	require_once __DIR__ . '/fields.php';
 }

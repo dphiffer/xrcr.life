@@ -14,6 +14,19 @@
 		<meta name="twitter:title" content="Extinction Rebellion: Capital Region">
 		<meta name="twitter:description" content="We are facing an unprecedented global emergency. Life on Earth is in crisis: scientists agree we have entered a period of abrupt climate breakdown, and we are in the midst of a mass extinction of our own making.">
 		<meta name="twitter:image" content="https://xrcr.life/wp-content/themes/xrcr/img/twitter.jpg">
+
+		<?php if (function_exists('get_field') && get_field('google_analytics_id', 'options')) { ?>
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148457113-1"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', '<?php the_field('google_analytics_id', 'options'); ?>');
+		</script>
+
+		<?php } ?>
 		<?php wp_head(); ?>
 	</head>
 	<body <?php body_class(); ?>>
