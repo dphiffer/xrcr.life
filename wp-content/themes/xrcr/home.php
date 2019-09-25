@@ -3,7 +3,20 @@
 Template Name: Home
 */
 ?>
-<?php get_header(); ?>
+<?php
+
+get_header();
+
+global $post;
+
+if (has_post_thumbnail($post->ID)) {
+
+	$attachment_id = get_post_thumbnail_id($post->ID);
+	list($image) = wp_get_attachment_image_src($attachment_id, 'fullsize');
+
+	?>
+	<header class="image-bg" style="background-image: url('<?php echo $image; ?>');"></header>
+<?php } else { ?>
 <header>
 	<div id="canvas"></div>
 	<div class="container">
@@ -12,6 +25,7 @@ Template Name: Home
 		</h1>
 	</div>
 </header>
+<?php } ?>
 <div id="about">
 	<div class="container">
 		<img src="<?php img_src('xr-logo.svg'); ?>" alt="Extinction Rebellion" width="300" class="logo">
