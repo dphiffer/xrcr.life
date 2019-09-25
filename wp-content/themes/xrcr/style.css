@@ -421,6 +421,10 @@ footer .social i {
 	margin-right: 10px;
 }
 
+.p5Canvas {
+	display: none;
+}
+
 @media screen and (min-width: 480px) {
 
 	nav .social {
