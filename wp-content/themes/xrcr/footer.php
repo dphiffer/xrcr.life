@@ -5,11 +5,11 @@
 				)); ?>
 				<ul class="social">
 					<li><a href="mailto:info@xrcr.life"><i class="fa fa-envelope"></i>Contact us</a></li>
-					<li><a href="https://www.instagram.com/extinctionrebellion.cr/"><i class="fab fa-instagram"></i>XRCR on Instagram</a>
+					<li><a href="https://www.instagram.com/xrcrlife/"><i class="fab fa-instagram"></i>XRCR on Instagram</a>
 					</li>
-					<li><a href="https://www.facebook.com/extinctionrebellion.cr/"><i class="fab fa-facebook-square"></i>XRCR on Facebook</a>
+					<li><a href="https://www.facebook.com/xrcrlife/"><i class="fab fa-facebook-square"></i>XRCR on Facebook</a>
 					</li>
-					<li><a href="https://twitter.com/_XRCR"><i class="fab fa-twitter"></i>XRCR on Twitter</a>
+					<li><a href="https://twitter.com/xrcrlife"><i class="fab fa-twitter"></i>XRCR on Twitter</a>
 					</li>
 				</ul>
 			</div>
