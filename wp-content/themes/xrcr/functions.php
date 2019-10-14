@@ -52,16 +52,27 @@ function xrcr_contact_title($post_id) {
 		return;
 	}
 
-	// Avoid infinite loops
-	remove_action('save_post', 'xrcr_contact_title');
-
 	$first_name = get_field('first_name', $post_id);
 	$last_name = get_field('last_name', $post_id);
 
+	$post_title = "$last_name, $first_name";
+	if (empty($last_name)) {
+		$post_title = $first_name;
+	}
+	if (empty($first_name)) {
+		$post_title = get_post_meta($post_id, 'email', true);
+	}
+
+	// Avoid infinite loops
+	remove_action('save_post', 'xrcr_contact_title');
+
 	wp_update_post(array(
 		'ID' => $post_id,
-		'post_title' => "$last_name, $first_name"
+		'post_title' => $post_title
 	));
+
+	// Ok, we should've avoided an infinite loop
+	add_action('save_post', 'xrcr_contact_title');
 }
 add_action('save_post', 'xrcr_contact_title');
 
@@ -97,16 +108,7 @@ function xrcr_join() {
 			update_post_meta($post_id, 'phone', $_POST['phone']);
 			update_post_meta($post_id, 'zip', $_POST['zip']);
 			update_post_meta($post_id, 'email', $_POST['email']);
-
-			$post_title = "{$_POST['last_name']}, {$_POST['first_name']}";
-			if (empty($_POST['last_name'])) {
-				$post_title = $_POST['first_name'];
-			}
-
-			wp_update_post(array(
-				'ID' => $post_id,
-				'post_title' => $post_title
-			));
+			xrcr_contact_title($post_id);
 			$saved = true;
 		}
 	}
@@ -152,10 +154,7 @@ function xrcr_export() {
 		'action_volunteer',
 		'art_volunteer',
 		'outreach_volunteer',
-		'action_circle',
-		'regen_circle',
-		'media_circle',
-		'infra_circle',
+		'volunteer_time',
 		'skills',
 		'reference',
 		'feedback',
