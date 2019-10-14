@@ -97,9 +97,15 @@ function xrcr_join() {
 			update_post_meta($post_id, 'phone', $_POST['phone']);
 			update_post_meta($post_id, 'zip', $_POST['zip']);
 			update_post_meta($post_id, 'email', $_POST['email']);
+
+			$post_title = "{$_POST['last_name']}, {$_POST['first_name']}";
+			if (empty($_POST['last_name'])) {
+				$post_title = $_POST['first_name'];
+			}
+
 			wp_update_post(array(
 				'ID' => $post_id,
-				'post_title' => "{$_POST['last_name']}, {$_POST['first_name']}"
+				'post_title' => $post_title
 			));
 			$saved = true;
 		}
