@@ -35,44 +35,51 @@ if (has_post_thumbnail($post->ID)) {
 	</div>
 </div>
 <?php get_template_part('join-form'); ?>
-<div id="events">
-	<div class="container">
-		<h2>Events</h2>
-		<?php
+<?php
 
-		$query = new WP_Query(array(
-			'post_type' => 'event',
-			'posts_per_page' => 10,
-			'meta_key' => 'time',
-			'orderby' => 'meta_value',
-			'order' => 'ASC',
-			'meta_query' => array(
-				array(
-					'key' => 'time',
-					'compare' => '>=',
-					'value' => current_time("Y-m-d 00:00:00")
-				)
-			)
-		));
+$query = new WP_Query(array(
+	'post_type' => 'event',
+	'posts_per_page' => 10,
+	'meta_key' => 'time',
+	'orderby' => 'meta_value',
+	'order' => 'ASC',
+	'meta_query' => array(
+		array(
+			'key' => 'time',
+			'compare' => '>=',
+			'value' => current_time("Y-m-d 00:00:00")
+		)
+	)
+));
 
-		while ($query->have_posts()) {
-			$query->the_post();
-			echo "<div class=\"event\">";
-			?>
-			<h4 class="time">
-				<i class="fa fa-calendar"></i>
-				<?php the_field('time'); ?>
-			</h4>
-			<h3><a href="<?php the_field('link'); ?>"><?php the_title(); ?></a></h3>
-			<div class="location">
-				<i class="fa fa-map-pin"></i>
-				<?php the_field('location'); ?>
-			</div>
+if ($query->have_posts()) {
+	?>
+	<div id="events">
+		<div class="container">
+			<h2>Events</h2>
 			<?php
-			echo "</div>";
-		}
 
-		?>
+			while ($query->have_posts()) {
+				$query->the_post();
+				echo "<div class=\"event\">";
+				?>
+				<h4 class="time">
+					<i class="fa fa-calendar"></i>
+					<?php the_field('time'); ?>
+				</h4>
+				<h3><a href="<?php the_field('link'); ?>"><?php the_title(); ?></a></h3>
+				<div class="location">
+					<i class="fa fa-map-pin"></i>
+					<?php the_field('location'); ?>
+				</div>
+				<?php
+				echo "</div>";
+			}
+
+			?>
+		</div>
 	</div>
-</div>
-<?php get_footer(); ?>
+	<?php
+}
+
+get_footer();
