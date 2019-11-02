@@ -21,12 +21,12 @@
 					<input type="text" name="email" id="email">
 				</div>
 				<div class="column">
-					<label for="phone">Phone number (optional)</label>
-					<input type="text" name="phone" id="phone">
+					<label for="Phone">Phone number (optional)</label>
+					<input type="text" name="Phone" id="Phone">
 				</div>
 				<div class="column">
-					<label for="zip">Zip code (optional)</label>
-					<input type="text" name="zip" id="zip">
+					<label for="zip_code">Zip code (optional)</label>
+					<input type="text" name="zip_code" id="zip_code">
 				</div>
 				<div class="buttons">
 					<input type="submit" value="Join">
