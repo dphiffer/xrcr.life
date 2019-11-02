@@ -91,27 +91,8 @@
                 "maxlength": ""
             },
             {
-                "key": "field_5d7c5491338cd",
-                "label": "Phone Number",
-                "name": "phone",
-                "type": "text",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
-            },
-            {
                 "key": "field_5d7c554fded42",
-                "label": "Email Address",
+                "label": "Email",
                 "name": "email",
                 "type": "text",
                 "instructions": "",
@@ -131,7 +112,7 @@
             {
                 "key": "field_5d7c545addbb8",
                 "label": "Zip Code",
-                "name": "zip",
+                "name": "zip_code",
                 "type": "text",
                 "instructions": "",
                 "required": 0,
@@ -148,10 +129,10 @@
                 "maxlength": ""
             },
             {
-                "key": "field_5d7c56064e7fd",
-                "label": "House meeting host",
-                "name": "house_meeting_host",
-                "type": "radio",
+                "key": "field_5d7c5491338cd",
+                "label": "Phone",
+                "name": "Phone",
+                "type": "text",
                 "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
@@ -160,46 +141,17 @@
                     "class": "",
                     "id": ""
                 },
-                "choices": [
-                    "no",
-                    "yes"
-                ],
-                "allow_null": 0,
-                "other_choice": 0,
                 "default_value": "",
-                "layout": "horizontal",
-                "return_format": "value",
-                "save_other_choice": 0
-            },
-            {
-                "key": "field_5d7c56b3edcd6",
-                "label": "Willing arrest",
-                "name": "willing_arrest",
-                "type": "radio",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "choices": [
-                    "no",
-                    "yes"
-                ],
-                "allow_null": 0,
-                "other_choice": 0,
-                "default_value": 0,
-                "layout": "horizontal",
-                "return_format": "value",
-                "save_other_choice": 0
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
             },
             {
                 "key": "field_5d7c5731297d9",
-                "label": "Action volunteer",
-                "name": "action_volunteer",
-                "type": "radio",
+                "label": "Actions",
+                "name": "Interest_Actions",
+                "type": "checkbox",
                 "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
@@ -208,22 +160,21 @@
                     "class": "",
                     "id": ""
                 },
-                "choices": [
-                    "no",
-                    "yes"
-                ],
-                "allow_null": 0,
-                "other_choice": 0,
-                "default_value": 0,
-                "layout": "horizontal",
+                "choices": {
+                    "1": "Interested in Actions"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
                 "return_format": "value",
-                "save_other_choice": 0
+                "save_custom": 0
             },
             {
                 "key": "field_5d7c577c3fe83",
-                "label": "Art volunteer",
-                "name": "art_volunteer",
-                "type": "radio",
+                "label": "Art",
+                "name": "Interest_Art",
+                "type": "checkbox",
                 "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
@@ -232,22 +183,90 @@
                     "class": "",
                     "id": ""
                 },
-                "choices": [
-                    "no",
-                    "yes"
-                ],
-                "allow_null": 0,
-                "other_choice": 0,
-                "default_value": 0,
-                "layout": "horizontal",
+                "choices": {
+                    "1": "Interested in Art"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
                 "return_format": "value",
-                "save_other_choice": 0
+                "save_custom": 0
+            },
+            {
+                "key": "field_5d7c56064e7fd",
+                "label": "HFE Host",
+                "name": "Interest_HFE_Host",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "1": "Interested in being a HFE host"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
+            },
+            {
+                "key": "field_5dbdcefc160a9",
+                "label": "Infrastructure",
+                "name": "Interest_Infrastructure",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "1": "Interested in Infrastructure"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
+            },
+            {
+                "key": "field_5dbdcf34160aa",
+                "label": "Media",
+                "name": "Interest_Media",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "1": "Interested in Media & Messaging"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
             },
             {
                 "key": "field_5d7c57af7842a",
-                "label": "Outreach volunteer",
-                "name": "outreach_volunteer",
-                "type": "radio",
+                "label": "Outreach",
+                "name": "Interest_Outreach",
+                "type": "checkbox",
                 "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
@@ -256,22 +275,44 @@
                     "class": "",
                     "id": ""
                 },
-                "choices": [
-                    "no",
-                    "yes"
-                ],
-                "allow_null": 0,
-                "other_choice": 0,
-                "default_value": 0,
-                "layout": "horizontal",
+                "choices": {
+                    "1": "Interested in Outreach"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
                 "return_format": "value",
-                "save_other_choice": 0
+                "save_custom": 0
+            },
+            {
+                "key": "field_5dbdcf79160ab",
+                "label": "Regen",
+                "name": "Interest_Regen",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "1": "Interested in Regenerative Culture"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
             },
             {
                 "key": "field_5da4e1d88659c",
-                "label": "Volunteer time",
-                "name": "volunteer_time",
-                "type": "text",
+                "label": "Availability: A",
+                "name": "Avail_A_8+hrs\/wk",
+                "type": "checkbox",
                 "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
@@ -280,16 +321,135 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
+                "choices": {
+                    "1": "8+ hours\/week"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
+            },
+            {
+                "key": "field_5dbdd027160ac",
+                "label": "Availability: B",
+                "name": "Avail_B_4-8hrs\/wk",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "1": "4-8 hours\/week"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
+            },
+            {
+                "key": "field_5dbdd045160ad",
+                "label": "Availability: C",
+                "name": "Avail_C_2-3hrs\/wk",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "1": "2-3 hours\/week"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
+            },
+            {
+                "key": "field_5dbdd0ea160ae",
+                "label": "Availability: D",
+                "name": "Avail_D_projects",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "1": "Can help with art builds"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
+            },
+            {
+                "key": "field_5dbdd10d160af",
+                "label": "Availability: E",
+                "name": "Avail_E_events",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "1": "Can come to our events"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
+            },
+            {
+                "key": "field_5d7c589178431",
+                "label": "Transportation help",
+                "name": "Transportation_Help",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "1": "Needs transportation help"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
             },
             {
                 "key": "field_5d7c58517842f",
                 "label": "Skills",
-                "name": "skills",
+                "name": "Skills_Text",
                 "type": "textarea",
                 "instructions": "",
                 "required": 0,
@@ -307,8 +467,8 @@
             },
             {
                 "key": "field_5d7c586c78430",
-                "label": "How did you hear of XR?",
-                "name": "reference",
+                "label": "How did you hear about XR?",
+                "name": "Heard_About_XR",
                 "type": "textarea",
                 "instructions": "",
                 "required": 0,
@@ -325,10 +485,56 @@
                 "new_lines": ""
             },
             {
-                "key": "field_5d7c589178431",
-                "label": "Feedback",
-                "name": "feedback",
-                "type": "textarea",
+                "key": "field_5dbdd388160b0",
+                "label": "Arrest",
+                "name": "Willing_Arrested",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "1": "Willing to risk arrest"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
+            },
+            {
+                "key": "field_5dbdd3dd160b1",
+                "label": "Prison",
+                "name": "Willing_Prison",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "1": "Willing to risk imprisonment"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
+            },
+            {
+                "key": "field_5dbdd40f160b2",
+                "label": "Tags",
+                "name": "can2_user_tags",
+                "type": "text",
                 "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
@@ -339,14 +545,14 @@
                 },
                 "default_value": "",
                 "placeholder": "",
-                "maxlength": "",
-                "rows": 3,
-                "new_lines": ""
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
             },
             {
-                "key": "field_5d7c58be7a2a2",
-                "label": "October 7 NYC",
-                "name": "oct_7_nyc",
+                "key": "field_5dbdd42a160b3",
+                "label": "Subscription status",
+                "name": "can2_subscription_status",
                 "type": "radio",
                 "instructions": "",
                 "required": 0,
@@ -356,35 +562,16 @@
                     "class": "",
                     "id": ""
                 },
-                "choices": [
-                    "no",
-                    "yes"
-                ],
+                "choices": {
+                    "subscribed": "Subscribed",
+                    "unsubscribed": "Unsubscribed"
+                },
                 "allow_null": 0,
                 "other_choice": 0,
-                "default_value": 0,
-                "layout": "horizontal",
+                "default_value": "",
+                "layout": "vertical",
                 "return_format": "value",
                 "save_other_choice": 0
-            },
-            {
-                "key": "field_5d7c592e7a2a3",
-                "label": "Notes from data inputter",
-                "name": "input_notes",
-                "type": "textarea",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": "",
-                "maxlength": "",
-                "rows": 3,
-                "new_lines": ""
             }
         ],
         "location": [
