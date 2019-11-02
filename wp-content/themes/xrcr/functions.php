@@ -136,41 +136,37 @@ add_action('wp_ajax_xrcr_join', 'xrcr_join');
 add_action('wp_ajax_nopriv_xrcr_join', 'xrcr_join');
 
 function xrcr_export() {
+
+	$fields_path = __DIR__ . '/fields.json';
+	if (! file_exists($fields_path)) {
+		echo "Error: could not find fields.json\n";
+		exit;
+	}
+
+	$fields_json = file_get_contents($fields_path);
+	$fields = json_decode($fields_json, 'as hash');
+	$headers = array();
+
+	foreach ($fields as $fieldset) {
+		if ($fieldset['title'] == 'Contact Details') {
+			foreach ($fieldset['fields'] as $field) {
+				$headers[] = $field['name'];
+			}
+		}
+	}
+
 	$posts = get_posts(array(
 		'post_type' => 'contact',
 		'posts_per_page' => -1
 	));
 	$fh = fopen('php://stdout', 'w');
 
-	$fields = array(
-		'id',
-		'email',
-		'first_name',
-		'last_name',
-		'phone',
-		'zip',
-		'house_meeting_host',
-		'willing_arrest',
-		'action_volunteer',
-		'art_volunteer',
-		'outreach_volunteer',
-		'volunteer_time',
-		'skills',
-		'reference',
-		'feedback',
-		'oct_7_nyc',
-		'input_notes'
-	);
-
-	fputcsv($fh, $fields);
+	fputcsv($fh, $headers);
 
 	foreach ($posts as $post) {
-		$row = array($post->ID);
-		foreach ($fields as $field) {
-			if ($field == 'id') {
-				continue;
-			}
-			$row[] = get_field($field, $post->ID);
+		$row = array();
+		foreach ($headers as $field_name) {
+			$row[] = get_field($field_name, $post->ID);
 		}
 		fputcsv($fh, $row);
 	}
@@ -179,5 +175,5 @@ function xrcr_export() {
 }
 
 if (defined('WP_CLI') && WP_CLI) {
-	WP_CLI::add_command('contacts', 'xrcr_export');
+	WP_CLI::add_command('export:contacts', 'xrcr_export');
 }
