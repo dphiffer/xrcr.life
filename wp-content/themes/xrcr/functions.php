@@ -45,6 +45,28 @@ function xrcr_init() {
 }
 add_action('init', 'xrcr_init');
 
+function xrcr_get_contact_id($email) {
+
+	if (empty($email)) {
+		return null;
+	}
+	$email = xrcr_normalize_email($email);
+
+	global $wpdb;
+	$post_id = $wpdb->get_var($wpdb->prepare("
+		SELECT post_id
+		FROM wp_postmeta
+		WHERE meta_key = 'email'
+		  AND meta_value = %s
+	", $email));
+
+	if (empty($post_id)) {
+		return null;
+	}
+
+	return intval($post_id);
+}
+
 function xrcr_update_contact($post_id) {
 
 	// Sets the post_title and normalizes the email address.
@@ -109,10 +131,13 @@ function xrcr_join() {
 
 	$saved = false;
 	if (! empty($_POST['email'])) {
-		$post_id = wp_insert_post(array(
-			'post_type' => 'contact',
-			'post_status' => 'publish'
-		));
+		$post_id = xrcr_get_contact_id($_POST['email']);
+		if (empty($post_id)) {
+			$post_id = wp_insert_post(array(
+				'post_type' => 'contact',
+				'post_status' => 'publish'
+			));
+		}
 		if (! empty($post_id)) {
 			update_field('first_name', $_POST['first_name'], $post_id);
 			update_field('last_name', $_POST['last_name'], $post_id);
