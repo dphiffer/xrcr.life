@@ -228,8 +228,11 @@ function xrcr_normalize_email($email) {
 
 function xrcr_normalize_phone($phone) {
 	$phone = preg_replace('/\D/', '', $phone);
+	if (substr($phone, 0, 1) == '1') {
+		$phone = substr($phone, 1);
+	}
 	if (strlen($phone) == 10) {
-		$phone = "1$phone";
+		$phone = substr($phone, 0, 3) . '-' . substr($phone, 3, 3) . '-' . substr($phone, 6, 4);
 	}
 	return $phone;
 }
@@ -299,7 +302,26 @@ function xrcr_get_call_contact($page = 1) {
 		if (empty($phone)) {
 			continue;
 		}
-		return $contact;
+
+		$existing_calls = get_posts(array(
+			'post_type' => 'call',
+			'meta_key' => 'contact',
+			'meta_value' => $contact->ID
+		));
+		if (! empty($existing_calls)) {
+			continue;
+		}
+
+		$call_id = wp_insert_post(array(
+			'post_title' => $contact->post_title,
+			'post_type' => 'call',
+			'post_status' => 'publish'
+		));
+		update_field('contact', $contact->ID, $call_id);
+		update_field('status', 'pending', $call_id);
+		$call = get_post($call_id);
+
+		return array($call, $contact);
 	}
 	return xrcr_get_call_contact($page + 1);
 }

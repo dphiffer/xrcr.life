@@ -438,6 +438,10 @@ header .p5Canvas {
 	font-family: menlo, monospace;
 }
 
+#call .last-name {
+	font-size: 0.6em;
+}
+
 #call .button {
 	margin-bottom: 5px;
 }

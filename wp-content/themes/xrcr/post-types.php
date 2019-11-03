@@ -80,6 +80,39 @@ $args = array(
 register_taxonomy('circles', array('contact'), $args);
 
 $labels = array(
+	'name'               => 'Calls',
+	'singular_name'      => 'Call',
+	'menu_name'          => 'Calls',
+	'name_admin_bar'     => 'Calls',
+	'add_new'            => 'Add New',
+	'add_new_item'       => 'Add New Call',
+	'new_item'           => 'New Call',
+	'edit_item'          => 'Edit Call',
+	'view_item'          => 'View Call',
+	'all_items'          => 'All Calls',
+	'search_items'       => 'Search Calls',
+	'parent_item_colon'  => 'Parent Calls:',
+	'not_found'          => 'No Calls found.',
+	'not_found_in_trash' => 'No Calls found in Trash.',
+);
+$args = array(
+	'labels'             => $labels,
+	'description'        => 'Contacts',
+	'public'             => false,
+	'publicly_queryable' => false,
+	'show_ui'            => true,
+	'show_in_menu'       => true,
+	'query_var'          => false,
+	'capability_type'    => 'post',
+	'has_archive'        => true,
+	'hierarchical'       => false,
+	'menu_position'      => 5,
+	'menu_icon'          => 'dashicons-phone',
+	'supports'           => array('revisions')
+);
+register_post_type('call', $args);
+
+$labels = array(
 	'name'               => 'Events',
 	'singular_name'      => 'Event',
 	'menu_name'          => 'Calendar',

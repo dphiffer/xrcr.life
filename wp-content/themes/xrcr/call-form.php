@@ -1,15 +1,37 @@
 <?php
 
-$contact = xrcr_get_call_contact();
+if (! empty($_GET['call'])) {
+	$call_id = $_GET['call'];
+	$call = get_post($call_id);
+	$contact_id = get_field('contact', $call_id);
+	$contact = get_post($contact_id);
+} else {
+	list($call, $contact) = xrcr_get_call_contact();
+}
+
 $phone = get_field('Phone', $contact->ID);
 $phone = xrcr_normalize_phone($phone);
 
 ?>
 <div id="call">
 	<div class="container">
-		<h2><?php echo $contact->post_title; ?></h2>
-		<a href="tel://<?php echo $phone; ?>" class="button">Call</a>
-		<a href="#" class="button btn-secondary">Skip</a>
+		<h2><?php echo get_field('first_name', $contact->ID); ?>
+			<span class="last-name"><?php echo get_field('last_name', $contact->ID); ?></span>
+		</h2>
+		<h3><?php echo $phone; ?></h3>
+		<a href="/call/" class="button btn-secondary">Next</a>
+		<div class="call-details">
+			<?php acf_form(array(
+				'post_id' => $call->ID,
+				'fields' => array(
+					'status',
+					'caller_notes'
+				),
+				'submit_value' => 'Save call',
+				'html_updated_message' => 'Call details saved.',
+				'return' => "?call=$call->ID"
+			)); ?>
+		</div>
 		<?php acf_form(array(
 			'post_id' => $contact->ID,
 			'fields' => array(
@@ -30,7 +52,9 @@ $phone = xrcr_normalize_phone($phone);
 				'Heard_About_XR',
 				'Willing_Arrested'
 			),
-			'html_updated_message' => 'Contact saved.'
+			'submit_value' => 'Update contact',
+			'html_updated_message' => 'Contact details saved.',
+			'return' => "?call=$call->ID"
 		)); ?>
 	</div>
 </div>
