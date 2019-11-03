@@ -238,7 +238,7 @@ input[type="submit"],
 
 .btn-secondary {
 	color: #000;
-	background: #ccc;
+	background: rgb(117, 208, 241);
 }
 
 form {
@@ -438,6 +438,14 @@ header .p5Canvas {
 	font-family: menlo, monospace;
 }
 
+#call h2 {
+	margin-bottom: 0;
+}
+
+#call h3 {
+	margin-top: 0;
+}
+
 #call .last-name {
 	font-size: 0.6em;
 }
@@ -451,8 +459,9 @@ header .p5Canvas {
 }
 
 #call textarea {
+	font-family: menlo, monospace;
 	background: #dedede;
-	width: 290px;
+	width: 100%;
 	border: none;
 	padding: 5px;
 }

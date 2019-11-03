@@ -116,6 +116,9 @@ add_action('save_post', 'xrcr_update_contact');
 function xrcr_get_contact_score($post_id) {
 	$score = 0;
 	$fields = get_fields($post_id);
+	if (empty($fields)) {
+		return $score;
+	}
 	foreach ($fields as $field => $value) {
 		if ($field == 'Avail_E_events' && ! empty($value)) {
 			$score += 1;
@@ -285,7 +288,8 @@ function xrcr_add_custom_column_do_sortable($vars) {
 	return $vars;
 }
 
-function xrcr_get_call_contact($page = 1) {
+function xrcr_get_call_id($page = 1) {
+
 	$contacts = get_posts(array(
 		'post_type' => 'contact',
 		'posts_per_page' => 10,
@@ -294,9 +298,11 @@ function xrcr_get_call_contact($page = 1) {
 		'orderby' => 'meta_value',
 		'order' => 'DESC'
 	));
+
 	if (empty($contacts)) {
 		return null;
 	}
+
 	foreach ($contacts as $contact) {
 		$phone = get_field('Phone', $contact->ID);
 		if (empty($phone)) {
@@ -319,11 +325,10 @@ function xrcr_get_call_contact($page = 1) {
 		));
 		update_field('contact', $contact->ID, $call_id);
 		update_field('status', 'pending', $call_id);
-		$call = get_post($call_id);
 
-		return array($call, $contact);
+		return $call_id;
 	}
-	return xrcr_get_call_contact($page + 1);
+	return xrcr_get_call_id($page + 1);
 }
 
 function xrcr_migrate_contacts() {

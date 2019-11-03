@@ -1,11 +1,11 @@
 <?php
-/*
 
-Template: Call page
+if (empty($_GET['call'])) {
+	$call_id = xrcr_get_call_id();
+	wp_redirect("/call/?call=$call_id");
+	exit;
+}
 
-*/
-
-global $contact;
 acf_form_head();
 get_header();
 

@@ -1,13 +1,9 @@
 <?php
 
-if (! empty($_GET['call'])) {
-	$call_id = $_GET['call'];
-	$call = get_post($call_id);
-	$contact_id = get_field('contact', $call_id);
-	$contact = get_post($contact_id);
-} else {
-	list($call, $contact) = xrcr_get_call_contact();
-}
+$call_id = $_GET['call'];
+$call = get_post($call_id);
+$contact_id = get_field('contact', $call_id);
+$contact = get_post($contact_id);
 
 $phone = get_field('Phone', $contact->ID);
 $phone = xrcr_normalize_phone($phone);
