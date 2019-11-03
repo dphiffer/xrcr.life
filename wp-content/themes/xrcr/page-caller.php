@@ -3,7 +3,7 @@
 if ((current_user_can('editor') || current_user_can('administrator')) &&
     empty($_GET['call'])) {
 	$call_id = xrcr_get_call_id();
-	wp_redirect("/call/?call=$call_id");
+	wp_redirect("/caller/?call=$call_id");
 	exit;
 }
 
@@ -13,7 +13,7 @@ get_header();
 if (current_user_can('editor') || current_user_can('administrator')) {
 	get_template_part('call-form');
 } else {
-	$redirect = get_site_url(null, '/call/');
+	$redirect = get_site_url(null, '/caller/');
 	$redirect = urlencode($redirect);
 	?>
 	<div class="container">
