@@ -57,6 +57,29 @@ $args = array(
 register_taxonomy('attended', array('contact'), $args);
 
 $labels = array(
+	'name'              => 'Circles',
+	'singular_name'     => 'Circle',
+	'search_items'      => 'Search Circles',
+	'all_items'         => 'All Circles',
+	'parent_item'       => 'Parent Circle',
+	'parent_item_colon' => 'Parent Circle:',
+	'edit_item'         => 'Edit Circles',
+	'update_item'       => 'Update Circles',
+	'add_new_item'      => 'Add New Circle',
+	'new_item_name'     => 'New Circle Name',
+	'menu_name'         => 'Circles',
+);
+$args = array(
+	'hierarchical'      => true,
+	'labels'            => $labels,
+	'show_ui'           => true,
+	'show_admin_column' => true,
+	'public'            => false,
+	'query_var'         => false
+);
+register_taxonomy('circles', array('contact'), $args);
+
+$labels = array(
 	'name'               => 'Events',
 	'singular_name'      => 'Event',
 	'menu_name'          => 'Calendar',
