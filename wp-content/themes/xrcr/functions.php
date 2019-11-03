@@ -69,7 +69,8 @@ function xrcr_get_contact_id($email) {
 
 function xrcr_update_contact($post_id) {
 
-	// Sets the post_title and normalizes the email address.
+	// Sets the post_title and normalizes the email address, and assigns a score
+	// based on volunteering availability.
 
 	$post_type = get_post_type($post_id);
 	if ($post_type != 'contact') {
@@ -94,6 +95,9 @@ function xrcr_update_contact($post_id) {
 		$post_title = $email;
 	}
 
+	$score = xrcr_get_contact_score($post_id);
+	update_post_meta($post_id, '_score', $score);
+
 	// Avoid infinite loops
 	remove_action('save_post', 'xrcr_update_contact');
 
@@ -108,6 +112,27 @@ function xrcr_update_contact($post_id) {
 	return $post_id;
 }
 add_action('save_post', 'xrcr_update_contact');
+
+function xrcr_get_contact_score($post_id) {
+	$score = 0;
+	$fields = get_fields($post_id);
+	foreach ($fields as $field => $value) {
+		if ($field == 'Avail_E_events' && ! empty($value)) {
+			$score += 1;
+		} else if ($field == 'Avail_D_projects' && ! empty($value)) {
+			$score += 2;
+		} else if ($field == 'Avail_C_2-3hrs/wk' && ! empty($value)) {
+			$score += 2;
+		} else if ($field == 'Avail_B_4-8hrs/wk' && ! empty($value)) {
+			$score += 4;
+		} else if ($field == 'Avail_A_8+hrs/wk' && ! empty($value)) {
+			$score += 8;
+		} else if (substr($field, 0, 8) == 'Interest' && ! empty($value)) {
+			$score += 1;
+		}
+	}
+	return $score;
+}
 
 function xrcr_join() {
 
@@ -201,11 +226,59 @@ function xrcr_normalize_email($email) {
 	return $email;
 }
 
+function xrcr_add_contact_score_column($columns) {
+	$new_columns = array();
+	foreach ($columns as $key => $value) {
+		if ($key == 'date') {
+			$new_columns['score'] = 'Score';
+		}
+		$new_columns[$key] = $value;
+	}
+	return $new_columns;
+}
+add_filter('manage_contact_posts_columns', 'xrcr_add_contact_score_column');
+
+function xrcr_add_contact_score_data($column, $post_id) {
+	if ($column == 'score') {
+		echo get_post_meta($post_id, '_score', true);
+	}
+}
+add_action('manage_contact_posts_custom_column', 'xrcr_add_contact_score_data', 10, 2);
+
+function xrcr_contact_score_column_sortable($columns) {
+	$columns['score'] = 'score';
+	return $columns;
+}
+add_filter('manage_edit-contact_sortable_columns', 'xrcr_contact_score_column_sortable');
+
+function xrcr_add_custom_column_sort_request() {
+	add_filter('request', 'xrcr_add_custom_column_do_sortable');
+}
+add_action('load-edit.php', 'xrcr_add_custom_column_sort_request');
+
+function xrcr_add_custom_column_do_sortable($vars) {
+
+	if (isset($vars['post_type']) && $vars['post_type'] == 'contact') {
+		if (isset($vars['orderby']) && $vars['orderby'] == 'score') {
+
+			$vars = array_merge(
+				$vars,
+				array(
+					'meta_key' => '_score',
+					'orderby' => 'meta_value_num'
+				)
+			);
+		}
+	}
+
+	return $vars;
+}
+
 function xrcr_migrate_contacts() {
 
 	global $wpdb;
 
-	$curr_version = 1;
+	$curr_version = 2;
 	$option_key = 'xrcr_contacts_migration_version';
 
 	$version = get_option($option_key, 0);
@@ -236,6 +309,17 @@ function xrcr_migrate_contacts() {
 				'post_id' => $row->post_id,
 				'meta_key' => 'email'
 			));
+		}
+	}
+
+	if ($version < 2) {
+		$contacts = get_posts(array(
+			'post_type' => 'contact',
+			'posts_per_page' => -1
+		));
+		foreach ($contacts as $post) {
+			$score = xrcr_get_contact_score($post->ID);
+			update_post_meta($post->ID, '_score', $score);
 		}
 	}
 
