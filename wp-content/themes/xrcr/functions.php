@@ -226,6 +226,14 @@ function xrcr_normalize_email($email) {
 	return $email;
 }
 
+function xrcr_normalize_phone($phone) {
+	$phone = preg_replace('/\D/', '', $phone);
+	if (strlen($phone) == 10) {
+		$phone = "1$phone";
+	}
+	return $phone;
+}
+
 function xrcr_add_contact_score_column($columns) {
 	$new_columns = array();
 	foreach ($columns as $key => $value) {
@@ -272,6 +280,28 @@ function xrcr_add_custom_column_do_sortable($vars) {
 	}
 
 	return $vars;
+}
+
+function xrcr_get_call_contact($page = 1) {
+	$contacts = get_posts(array(
+		'post_type' => 'contact',
+		'posts_per_page' => 10,
+		'paged' => $page,
+		'meta_key' => '_score',
+		'orderby' => 'meta_value',
+		'order' => 'DESC'
+	));
+	if (empty($contacts)) {
+		return null;
+	}
+	foreach ($contacts as $contact) {
+		$phone = get_field('Phone', $contact->ID);
+		if (empty($phone)) {
+			continue;
+		}
+		return $contact;
+	}
+	return xrcr_get_call_contact($page + 1);
 }
 
 function xrcr_migrate_contacts() {

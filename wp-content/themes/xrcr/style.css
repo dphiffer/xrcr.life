@@ -236,6 +236,11 @@ input[type="submit"],
 	padding-top: 3px;
 }
 
+.btn-secondary {
+	color: #000;
+	background: #ccc;
+}
+
 form {
 	padding-bottom: 30px;
 }
@@ -427,6 +432,31 @@ footer .social i {
 
 header .p5Canvas {
 	display: block;
+}
+
+#call {
+	font-family: menlo, monospace;
+}
+
+#call .button {
+	margin-bottom: 5px;
+}
+
+#call input[type="text"] {
+	background: #dedede;
+}
+
+#call textarea {
+	background: #dedede;
+	width: 290px;
+	border: none;
+	padding: 5px;
+}
+
+#call .acf-checkbox-list li,
+#call .acf-radio-list li {
+	list-style: none;
+	margin-left: 0;
 }
 
 @media screen and (min-width: 480px) {
