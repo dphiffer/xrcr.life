@@ -1,6 +1,7 @@
 <?php
 
-if (empty($_GET['call'])) {
+if ((current_user_can('editor') || current_user_can('administrator')) &&
+    empty($_GET['call'])) {
 	$call_id = xrcr_get_call_id();
 	wp_redirect("/call/?call=$call_id");
 	exit;
