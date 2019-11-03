@@ -413,17 +413,22 @@ function xrcr_import_contacts($args) {
 		$lookup[$row->email] = intval($row->post_id);
 	}
 
+	$created = 0;
+	$updated = 0;
+
 	while ($row = fgetcsv($fh)) {
 
 		$email = xrcr_normalize_email($row[2]);
 
 		if (! empty($lookup[$email])) {
 			$post_id = $lookup[$email];
+			$updated++;
 		} else {
 			$post_id = wp_insert_post(array(
 				'post_type' => 'contact',
 				'post_status' => 'publish'
 			));
+			$created++;
 		}
 
 		if (! empty($post_id)) {
@@ -433,6 +438,9 @@ function xrcr_import_contacts($args) {
 			xrcr_update_contact($post_id);
 		}
 	}
+
+	echo "$updated existing contacts\n";
+	echo "$created new contacts\n";
 	exit;
 }
 
