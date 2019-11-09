@@ -90,6 +90,29 @@ $args = array(
 register_post_type('call', $args);
 
 $labels = array(
+	'name'              => 'Call Type',
+	'singular_name'     => 'Call Type',
+	'search_items'      => 'Search Call Types',
+	'all_items'         => 'All Call Types',
+	'parent_item'       => 'Parent Call Types',
+	'parent_item_colon' => 'Parent Call Types:',
+	'edit_item'         => 'Edit Call Type',
+	'update_item'       => 'Update Call Type',
+	'add_new_item'      => 'Add New Call Type',
+	'new_item_name'     => 'New Call Type Name',
+	'menu_name'         => 'Call Types',
+);
+$args = array(
+	'hierarchical'      => true,
+	'labels'            => $labels,
+	'show_ui'           => true,
+	'show_admin_column' => true,
+	'public'            => false,
+	'query_var'         => false
+);
+register_taxonomy('call_type', array('call'), $args);
+
+$labels = array(
 	'name'               => 'Events',
 	'singular_name'      => 'Event',
 	'menu_name'          => 'Calendar',
