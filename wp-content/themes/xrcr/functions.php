@@ -41,6 +41,7 @@ add_action('after_setup_theme', 'xrcr_after_setup_theme');
 
 function xrcr_init() {
 	require_once __DIR__ . '/post-types.php';
+	require_once __DIR__ . '/roles.php';
 	register_nav_menu('footer-menu', 'Footer');
 }
 add_action('init', 'xrcr_init');
@@ -364,6 +365,29 @@ function xrcr_was_contact_recently_called($existing_calls) {
 
 	}
 	return $skip_contact;
+}
+
+function xrcr_ready_to_call() {
+
+	if (! current_user_can('call_contacts')) {
+		// Insufficient privileges (show the volunteer sign up form)
+		return false;
+	}
+
+	if (! empty($_GET['call'])) {
+		// Already have a call in the works
+		return false;
+	}
+
+	$valid_call_types = array(
+		'hfe-follow-up'
+	);
+	if (! empty($_GET['type']) && in_array($_GET['type'], $valid_call_types)) {
+		return $_GET['type'];
+	}
+
+	// Invalid type, bail out
+	return false;
 }
 
 function xrcr_migrate_contacts() {
