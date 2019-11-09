@@ -661,6 +661,74 @@
                 "layout": "vertical",
                 "return_format": "value",
                 "save_other_choice": 0
+            },
+            {
+                "key": "field_5dc6ed1857d22",
+                "label": "HFE Talk Date",
+                "name": "HFE_Talk_Date",
+                "type": "date_picker",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "display_format": "Y\/m\/d",
+                "return_format": "Y\/m\/d",
+                "first_day": 0
+            },
+            {
+                "key": "field_5dc6ed7257d23",
+                "label": "HFE Trained Date",
+                "name": "HFE_Trained_Date",
+                "type": "date_picker",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "display_format": "Y\/m\/d",
+                "return_format": "Y\/m\/d",
+                "first_day": 0
+            },
+            {
+                "key": "field_5dc6ed9757d24",
+                "label": "NVDA Training Date",
+                "name": "NVDA_Training_Date",
+                "type": "date_picker",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "display_format": "Y\/m\/d",
+                "return_format": "Y\/m\/d",
+                "first_day": 0
+            },
+            {
+                "key": "field_5dc6edad57d25",
+                "label": "NVDA Trainer Training Date",
+                "name": "NVDATrainerTraining_Date",
+                "type": "date_picker",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "display_format": "Y\/m\/d",
+                "return_format": "Y\/m\/d",
+                "first_day": 0
             }
         ],
         "location": [
