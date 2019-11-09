@@ -199,7 +199,7 @@ function xrcr_join() {
 add_action('wp_ajax_xrcr_join', 'xrcr_join');
 add_action('wp_ajax_nopriv_xrcr_join', 'xrcr_join');
 
-function xrcr_contact_headers() {
+function xrcr_contact_csv_headers() {
 
 	$fields_path = __DIR__ . '/fields.json';
 	if (! file_exists($fields_path)) {
@@ -395,7 +395,7 @@ function xrcr_import_contacts($args) {
 	echo "Loading {$args[0]}...\n";
 	$fh = fopen($args[0], 'r');
 
-	$expected_headers = xrcr_contact_headers();
+	$expected_headers = xrcr_contact_csv_headers();
 	$headers = fgetcsv($fh);
 
 	foreach ($expected_headers as $index => $field_name) {
@@ -451,7 +451,7 @@ function xrcr_import_contacts($args) {
 
 function xrcr_export_contacts() {
 
-	$headers = xrcr_contact_headers();
+	$headers = xrcr_contact_csv_headers();
 
 	$posts = get_posts(array(
 		'post_type' => 'contact',
