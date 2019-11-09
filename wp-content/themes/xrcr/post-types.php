@@ -34,17 +34,17 @@ $args = array(
 register_post_type('contact', $args);
 
 $labels = array(
-	'name'              => 'Attended',
-	'singular_name'     => 'Attended',
-	'search_items'      => 'Search Attended',
-	'all_items'         => 'All Events Attended',
-	'parent_item'       => 'Parent Event',
-	'parent_item_colon' => 'Parent Event:',
-	'edit_item'         => 'Edit Event Attended',
-	'update_item'       => 'Update Event Attended',
-	'add_new_item'      => 'Add New Event Attended',
-	'new_item_name'     => 'New Event Attended Name',
-	'menu_name'         => 'Attended',
+	'name'              => 'Attributes',
+	'singular_name'     => 'Attribute',
+	'search_items'      => 'Search Attributes',
+	'all_items'         => 'All Attributes',
+	'parent_item'       => 'Parent Attribute',
+	'parent_item_colon' => 'Parent Attribute:',
+	'edit_item'         => 'Edit Attribute',
+	'update_item'       => 'Update Attribute',
+	'add_new_item'      => 'Add New Attribute',
+	'new_item_name'     => 'New Attribute Name',
+	'menu_name'         => 'Attributes',
 );
 $args = array(
 	'hierarchical'      => true,
@@ -54,30 +54,7 @@ $args = array(
 	'public'            => false,
 	'query_var'         => false
 );
-register_taxonomy('attended', array('contact'), $args);
-
-$labels = array(
-	'name'              => 'Circles',
-	'singular_name'     => 'Circle',
-	'search_items'      => 'Search Circles',
-	'all_items'         => 'All Circles',
-	'parent_item'       => 'Parent Circle',
-	'parent_item_colon' => 'Parent Circle:',
-	'edit_item'         => 'Edit Circles',
-	'update_item'       => 'Update Circles',
-	'add_new_item'      => 'Add New Circle',
-	'new_item_name'     => 'New Circle Name',
-	'menu_name'         => 'Circles',
-);
-$args = array(
-	'hierarchical'      => true,
-	'labels'            => $labels,
-	'show_ui'           => true,
-	'show_admin_column' => true,
-	'public'            => false,
-	'query_var'         => false
-);
-register_taxonomy('circles', array('contact'), $args);
+register_taxonomy('attributes', array('contact'), $args);
 
 $labels = array(
 	'name'               => 'Calls',
