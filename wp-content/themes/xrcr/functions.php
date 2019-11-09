@@ -314,7 +314,7 @@ function xrcr_get_call_id($page = 1) {
 			'meta_key' => 'contact',
 			'meta_value' => $contact->ID
 		));
-		if (! empty($existing_calls)) {
+		if (xrcr_was_contact_recently_called($existing_calls)) {
 			continue;
 		}
 
@@ -329,6 +329,41 @@ function xrcr_get_call_id($page = 1) {
 		return $call_id;
 	}
 	return xrcr_get_call_id($page + 1);
+}
+
+function xrcr_was_contact_recently_called($existing_calls) {
+
+	$skip_contact = false;
+	$age_day = 60 * 60 * 24;
+	$age_week = $age_day * 7;
+
+	if (empty($existing_calls)) {
+		return $skip_contact;
+	}
+
+	foreach ($existing_calls as $call) {
+
+		$status = get_field('status', $call->ID);
+		$call_time = strtotime($call->post_date_gmt);
+		$call_age = current_time('timestamp', 'utf') - $call_time;
+
+		// Don't count unpublished calls
+		if ($call->post_status != 'publish') {
+			continue;
+		}
+
+		// Within 24 hours, pending calls are skipped
+		if ($status == 'pending' && $call_age < $age_day) {
+			$skip_contact = true;
+		}
+
+		// Don't call anyone more frequently than a week
+		if ($call_age < $age_week) {
+			$skip_contact = true;
+		}
+
+	}
+	return $skip_contact;
 }
 
 function xrcr_migrate_contacts() {
