@@ -212,7 +212,10 @@ label {
 	margin-bottom: 5px;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="email"],
+input[type="phone"] {
+	font-family: menlo, monospace;
 	padding: 10px;
 	width: 290px;
 	font-size: 18px;
@@ -470,10 +473,6 @@ header .p5Canvas {
 #call .acf-radio-list li {
 	list-style: none;
 	margin-left: 0;
-}
-
-form.call-type {
-	margin-bottom: 2em;
 }
 
 .call-type-description {

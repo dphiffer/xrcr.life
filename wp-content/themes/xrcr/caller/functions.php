@@ -1,5 +1,21 @@
 <?php
 
+function xrcr_caller_volunteer() {
+	$to = get_field('xrcr_caller_coordinator', 'options');
+	if (empty($to)) {
+		$ok = -1;
+	} else if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['phone'])) {
+		$ok = 0;
+	} else {
+		$ok = 1;
+		wp_mail($to, 'Caller volunteer submission', print_r($_POST, true));
+	}
+	wp_redirect(site_url("/caller/?ok=$ok"));
+	exit;
+}
+add_action('wp_ajax_xrcr_caller_volunteer', 'xrcr_caller_volunteer');
+add_action('wp_ajax_nopriv_xrcr_caller_volunteer', 'xrcr_caller_volunteer');
+
 function xrcr_caller_select() {
 
 	if (! current_user_can('call_contacts')) {
