@@ -12,18 +12,18 @@ function setup() {
 	canvas.parent('#canvas');
 	strokeWeight(6);
 	colors = {
-		green: color(20, 170, 55),
-		black: color(0, 0, 0),
-		lemon: color(247, 238, 106),
-		light_blue: color(117, 208, 241),
-		pink: color(237, 155, 196),
-		purple: color(152, 98, 151),
-		light_green: color(190, 210, 118),
-		warm_yellow: color(255, 193, 30),
-		bright_pink: color(207, 98, 151),
-		red: color(220, 79, 0),
-		dark_blue: color(56, 96, 170),
-		angry: color(200, 0, 130)
+		green: 'rgba(20, 170, 55, 0.25)',
+		black: 'rgba(0, 0, 0, 0.25)',
+		lemon: 'rgba(247, 238, 106, 0.25)',
+		light_blue: 'rgba(117, 208, 241, 0.25)',
+		pink: 'rgba(237, 155, 196, 0.25)',
+		purple: 'rgba(152, 98, 151, 0.25)',
+		light_green: 'rgba(190, 210, 118, 0.25)',
+		warm_yellow: 'rgba(255, 193, 30, 0.25)',
+		bright_pink: 'rgba(207, 98, 151, 0.25)',
+		red: 'rgba(220, 79, 0, 0.25)',
+		dark_blue: 'rgba(56, 96, 170, 0.25)',
+		angry: 'rgba(200, 0, 130, 0.25)'
 	};
 	background(colors.lemon);
 	fill(colors.lemon);
