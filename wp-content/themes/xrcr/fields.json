@@ -40,12 +40,12 @@
                 },
                 "choices": {
                     "pending": "Pending",
-                    "voicemail": "Left a voicemail",
-                    "answered": "Contact answered"
+                    "called": "Called",
+                    "voicemail": "Left a voicemail"
                 },
                 "allow_null": 0,
                 "other_choice": 0,
-                "default_value": "",
+                "default_value": "pending",
                 "layout": "vertical",
                 "return_format": "value",
                 "save_other_choice": 0
