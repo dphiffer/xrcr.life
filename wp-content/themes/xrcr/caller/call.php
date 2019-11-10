@@ -2,6 +2,13 @@
 
 $call_id = $_GET['call'];
 $call = get_post($call_id);
+
+$call_type = 'unknown';
+$call_type_terms = get_the_terms($call, 'call_type');
+if (! empty($call_type_terms)) {
+	$call_type = $call_type_terms[0]->slug;
+}
+
 $contact_id = get_field('contact', $call_id);
 $contact = get_post($contact_id);
 
@@ -15,7 +22,7 @@ $phone = xrcr_normalize_phone($phone);
 			<span class="last-name"><?php echo get_field('last_name', $contact->ID); ?></span>
 		</h2>
 		<h3><?php echo $phone; ?></h3>
-		<a href="/caller/?type=<?php echo $_GET['type']; ?>" class="button">Next call</a>
+		<a href="/caller/?type=<?php echo $call_type; ?>" class="button">Next call</a>
 		<div class="call-details">
 			<?php acf_form(array(
 				'post_id' => $call->ID,

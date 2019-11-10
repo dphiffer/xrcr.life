@@ -43,7 +43,7 @@ function xrcr_caller_redirect() {
 	$call_id = xrcr_caller_pick_id($call_type);
 
 	if (! empty($call_id)) {
-		return site_url("/caller/?call=$call_id&type=$call_type");
+		return site_url("/caller/?call=$call_id");
 	}
 
 	return false;
@@ -102,18 +102,70 @@ function xrcr_caller_pick_id($call_type, $page = 1) {
 			continue;
 		}
 
+		$term = get_term_by('slug', $call_type, 'call_type');
 		$call_id = wp_insert_post(array(
-			'post_title' => $contact->post_title,
+			'post_title' => "Pending call",
 			'post_type' => 'call',
-			'post_status' => 'publish'
+			'post_status' => 'publish',
+			'tax_input' => array(
+				'call_type' => array($term->term_taxonomy_id)
+			)
 		));
 		update_field('contact', $contact->ID, $call_id);
 		update_field('status', 'pending', $call_id);
+		xrcr_caller_save_post($call_id);
 
 		return $call_id;
 	}
 	return xrcr_caller_pick_id($call_type, $page + 1);
 }
+
+function xrcr_caller_save_post($post_id) {
+
+	// Sets the post_title.
+
+	$post_type = get_post_type($post_id);
+	if ($post_type != 'call') {
+		return $post_id;
+	}
+
+	$status = get_field('status', $post_id);
+	$status = str_replace('_', ' ', $status);
+	$status = ucfirst($status);
+
+	$contact_id = get_field('contact', $post_id);
+	$email = trim(get_field('email', $contact_id));
+	$first_name = trim(get_field('first_name', $contact_id));
+	$last_name = trim(get_field('last_name', $contact_id));
+
+	$name = "$first_name $last_name";
+	if (empty($last_name)) {
+		$name = $first_name;
+	}
+	if (empty($first_name)) {
+		$name = $email;
+	}
+
+	$current_user = wp_get_current_user();
+	$caller = $current_user->user_login;
+
+	$post_title = "$status: $name ($caller)";
+
+	// Avoid infinite loops
+	remove_action('save_post', 'xrcr_caller_save_post');
+
+	wp_update_post(array(
+		'ID' => $post_id,
+		'post_title' => $post_title
+	));
+
+	// Ok, we should've avoided an infinite loop
+	add_action('save_post', 'xrcr_caller_save_post');
+
+	return $post_id;
+}
+add_action('save_post', 'xrcr_caller_save_post');
+add_action('acf/save_post', 'xrcr_caller_save_post');
 
 function xrcr_caller_was_recently_called($existing_calls) {
 
@@ -161,12 +213,11 @@ function xrcr_caller_ready() {
 		return false;
 	}
 
-	$type = xrcr_caller_get_type();
 	$call = get_post($_GET['call']);
 
-	if (empty($type) || empty($call)) {
+	if (empty($call)) {
 		return false;
 	}
 
-	return $type;
+	return $call;
 }

@@ -78,8 +78,8 @@ function xrcr_update_contact($post_id) {
 		return $post_id;
 	}
 
-	$first_name = get_field('first_name', $post_id);
-	$last_name = get_field('last_name', $post_id);
+	$first_name = trim(get_field('first_name', $post_id));
+	$last_name = trim(get_field('last_name', $post_id));
 	$email = get_field('email', $post_id);
 	$normalized_email = xrcr_normalize_email($email);
 
