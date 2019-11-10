@@ -46,6 +46,10 @@ function xrcr_caller_redirect() {
 		return site_url("/caller/?call=$call_id");
 	}
 
+	if (! empty($call_type)) {
+		return site_url("/caller/?done=$call_type");
+	}
+
 	return false;
 }
 
@@ -74,29 +78,48 @@ function xrcr_caller_pick_id($call_type, $page = 1) {
 		return null;
 	}
 
-	$contacts = get_posts(array(
-		'post_type' => 'contact',
-		'posts_per_page' => 10,
-		'paged' => $page,
-		'meta_key' => '_score',
-		'orderby' => 'meta_value',
-		'order' => 'DESC'
-	));
+	if ($call_type == 'hfe-follow-up') {
+		$contacts = get_posts(array(
+			'post_type' => 'contact',
+			'posts_per_page' => 10,
+			'paged' => $page,
+			'meta_key' => 'HFE_Talk_Date',
+			'orderby' => 'meta_value',
+			'order' => 'DESC'
+		));
+	} else {
+		return null;
+	}
 
 	if (empty($contacts)) {
 		return null;
 	}
 
 	foreach ($contacts as $contact) {
+
 		$phone = get_field('Phone', $contact->ID);
 		if (empty($phone)) {
 			continue;
 		}
 
+		if ($call_type == 'hfe-follow-up') {
+			$hfe_date = get_field('HFE_Talk_Date', $contact->ID);
+			if (empty($hfe_date)) {
+				continue;
+			}
+		}
+
 		$existing_calls = get_posts(array(
 			'post_type' => 'call',
 			'meta_key' => 'contact',
-			'meta_value' => $contact->ID
+			'meta_value' => $contact->ID,
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'call_type',
+					'field' => 'slug',
+					'terms' => $call_type,
+				)
+			)
 		));
 		if (xrcr_caller_was_recently_called($existing_calls)) {
 			continue;

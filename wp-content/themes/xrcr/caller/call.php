@@ -7,10 +7,14 @@ $call_type = 'unknown';
 $call_type_terms = get_the_terms($call, 'call_type');
 if (! empty($call_type_terms)) {
 	$call_type = $call_type_terms[0]->slug;
+	$call_type_description = $call_type_terms[0]->description;
 }
 
 $contact_id = get_field('contact', $call_id);
 $contact = get_post($contact_id);
+
+$first_name = get_field('first_name', $contact->ID);
+$last_name = get_field('last_name', $contact->ID);
 
 $phone = get_field('Phone', $contact->ID);
 $phone = xrcr_normalize_phone($phone);
@@ -18,14 +22,29 @@ $phone = xrcr_normalize_phone($phone);
 ?>
 <div id="call">
 	<div class="container">
-		<h2><?php echo get_field('first_name', $contact->ID); ?>
-			<span class="last-name"><?php echo get_field('last_name', $contact->ID); ?></span>
+		<h2><?php echo $first_name; ?><span class="last-name"> <?php echo $last_name; ?></span>
 		</h2>
 		<h3><?php echo $phone; ?></h3>
 		<div class="nav-buttons">
 			<a href="/caller/?type=<?php echo $call_type; ?>" class="button">Next call</a>
 			<a href="/caller/" class="button btn-secondary">Done</a>
 			<br class="clear">
+		</div>
+		<div class="call-context">
+			<?php
+
+			echo "<p>$call_type_description</p>";
+
+			if ($call_type == 'hfe-follow-up') {
+				if (current_user_can('editor') || current_user_can('administrator')) {
+					$first_name = "<a href=\"/wp-admin/post.php?post=$contact->ID&action=edit\">$first_name</a>";
+				}
+				$hfe_date = get_field('HFE_Talk_Date', $contact_id);
+				$hfe_date = date('M j, Y', strtotime($hfe_date));
+				echo "<p>$first_name attended an HFE talk on <strong>$hfe_date</strong>.</p>\n";
+			}
+
+			?>
 		</div>
 		<div class="call-details">
 			<?php acf_form(array(

@@ -554,6 +554,17 @@ header .p5Canvas {
 	margin-bottom: 2em;
 }
 
+.call-context {
+	padding-top: 20px;
+	font-size: 0.8em;
+}
+
+.calls-done {
+	background: rgba(0, 0, 0, 0.2);
+	padding: 20px;
+	margin: 10px 0 20px 0;
+}
+
 #call-history {
 	padding: 20px 0 40px 0;
 }
