@@ -22,7 +22,11 @@ $phone = xrcr_normalize_phone($phone);
 			<span class="last-name"><?php echo get_field('last_name', $contact->ID); ?></span>
 		</h2>
 		<h3><?php echo $phone; ?></h3>
-		<a href="/caller/?type=<?php echo $call_type; ?>" class="button">Next call</a>
+		<div class="nav-buttons">
+			<a href="/caller/?type=<?php echo $call_type; ?>" class="button">Next call</a>
+			<a href="/caller/" class="button btn-secondary">Done</a>
+			<br class="clear">
+		</div>
 		<div class="call-details">
 			<?php acf_form(array(
 				'post_id' => $call->ID,

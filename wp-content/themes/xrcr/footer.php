@@ -12,6 +12,7 @@
 					<li><a href="https://twitter.com/xrcrlife"><i class="fab fa-twitter"></i>XRCR on Twitter</a>
 					</li>
 				</ul>
+				<br class="clear">
 			</div>
 		</footer>
 		<?php wp_footer(); ?>

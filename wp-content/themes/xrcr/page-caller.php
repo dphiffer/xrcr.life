@@ -6,6 +6,10 @@ if (! empty($redirect)) {
 	exit;
 }
 
+if (have_posts()) {
+	the_post();
+}
+
 acf_form_head();
 get_header();
 

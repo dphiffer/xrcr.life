@@ -1,8 +1,10 @@
 <form action="<?php echo site_url('/caller/'); ?>" id="about" class="call-type">
 	<div class="container">
 		<h2>Welcome to Caller City</h2>
-		<p>Calls are a critical part of how we keep momentum, thank you for your invaluable help! Calling people on the phone has become something of a lost art. Be yourself, try to listen, and enjoy the process. Our supporters, arrestees and circle organizers are on the other end of that phone line, and you can help them find their best, most righteous selves by helping out with XR!</p>
-		<input type="hidden" name="type" value="hfe-follow-up">
+		<?php the_content(); ?>
+		<div class="buttons">
+			<input type="hidden" name="type" value="hfe-follow-up">
+		</div>
 		<?php
 
 		/*
@@ -23,12 +25,32 @@
 
 		?>
 		</select>
-		<input type="submit" value="Start">
+		<input type="submit" value="Start calling">
 	</div>
 </form>
-<div id="events">
+<div id="call-history">
 	<div class="container">
 		<h2>Call history</h2>
-		<p><i>Nothing here yet.</i></p>
+		<?php
+
+		$calls = get_posts(array(
+			'post_type' => 'call'
+		));
+
+		if (empty($calls)) {
+			echo "<h4><i>Nothing here yet.</i></h4>\n";
+		} else {
+
+			echo "<ol>\n";
+
+			foreach ($calls as $call) {
+				$when = human_time_diff(current_time('timestamp', 'utc'), strtotime($call->post_date_gmt));
+				echo "<li class=\"call\"><h4><a href=\"/caller/?call=$call->ID\">$call->post_title</a></h4>$when ago</li>\n";
+			}
+
+			echo "</ol>\n";
+		}
+
+		?>
 	</div>
 </div>
