@@ -398,6 +398,11 @@ function xrcr_import_contacts($args) {
 
 		if (! empty($post_id)) {
 			foreach ($headers as $index => $field_name) {
+				if (substr($field_name, -5, 5) == '_name') {
+					$row[$index] = trim($row[$index]);
+				} else if (substr($field_name, -5, 5) == '_Date' && ! empty($row[$index])) {
+					$row[$index] = date('Y/m/d', strtotime($row[$index]));
+				}
 				update_field($field_name, $row[$index], $post_id);
 			}
 			xrcr_update_contact($post_id);

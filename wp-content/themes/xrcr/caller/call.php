@@ -7,6 +7,7 @@ $call_type = 'unknown';
 $call_type_terms = get_the_terms($call, 'call_type');
 if (! empty($call_type_terms)) {
 	$call_type = $call_type_terms[0]->slug;
+	$call_type_name = $call_type_terms[0]->name;
 	$call_type_description = $call_type_terms[0]->description;
 }
 
@@ -33,15 +34,50 @@ $phone = xrcr_normalize_phone($phone);
 		<div class="call-context">
 			<?php
 
-			echo "<p>$call_type_description</p>";
+			echo "<h4>$call_type_name</h4>\n";
+			echo "<p>$call_type_description</p>\n";
+
+			$event_fields = array(
+				'HFE_Talk_Date' => 'HFE Talk',
+				'HFE_Trained_Date' => 'HFE Talk Training',
+				'NVDA_Training_Date' => 'NVDA Training',
+				'NVDATrainerTraining_Date' => 'NVDA Trainer Training'
+			);
+			foreach ($event_fields as $event_field => $event_name) {
+				$date = get_field($event_field, $contact_id);
+				if (! empty($date)) {
+					$date = date('M j, Y', strtotime($date));
+					echo "<p><i class=\"fa fa-check-circle\"></i> Attended an $event_name on <strong>$date</strong>.</p>\n";
+				}
+			}
 
 			if ($call_type == 'hfe-follow-up') {
-				if (current_user_can('editor') || current_user_can('administrator')) {
-					$first_name = "<a href=\"/wp-admin/post.php?post=$contact->ID&action=edit\">$first_name</a>";
+				$nvda_events = get_posts(array(
+					'post_type' => 'event',
+					'posts_per_page' => 1,
+					'meta_key' => 'time',
+					'orderby' => 'meta_value',
+					'order' => 'ASC',
+					'meta_query' => array(
+						array(
+							'key' => 'time',
+							'compare' => '>=',
+							'value' => current_time("Y-m-d 00:00:00")
+						)
+					),
+					'tax_query' => array(
+						array(
+							'taxonomy' => 'event_type',
+							'field' => 'slug',
+							'terms' => 'nvda-training',
+						)
+					)
+				));
+				if (! empty($nvda_events)) {
+					$date = get_field('time', $nvda_events[0]->ID);
+					$date = date('M j, Y', strtotime($date));
+					echo "<p><i class=\"fa fa-calendar-alt\"></i> Next NVDA training is on <strong>$date</strong>.</p>\n";
 				}
-				$hfe_date = get_field('HFE_Talk_Date', $contact_id);
-				$hfe_date = date('M j, Y', strtotime($hfe_date));
-				echo "<p>$first_name attended an HFE talk on <strong>$hfe_date</strong>.</p>\n";
 			}
 
 			?>

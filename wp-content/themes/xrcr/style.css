@@ -478,6 +478,11 @@ header .p5Canvas {
 	border-top: 0;
 }
 
+#contact textarea {
+	border: none;
+	background-color: rgb(247, 238, 106);
+}
+
 #contact .acf-fields > .acf-field[data-name="Skills_Text"]::before {
 	display: block;
 	content: "Special skills";
@@ -557,6 +562,16 @@ header .p5Canvas {
 .call-context {
 	padding-top: 20px;
 	font-size: 0.8em;
+}
+
+.call-context h4 {
+	font-family: menlo, monospace;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.call-context p {
+	margin-bottom: 0.5em;
 }
 
 .calls-done {

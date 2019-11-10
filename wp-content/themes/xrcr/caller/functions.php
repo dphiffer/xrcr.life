@@ -85,7 +85,13 @@ function xrcr_caller_pick_id($call_type, $page = 1) {
 			'paged' => $page,
 			'meta_key' => 'HFE_Talk_Date',
 			'orderby' => 'meta_value',
-			'order' => 'DESC'
+			'order' => 'DESC',
+			'meta_query' => array(
+				array(
+					'key' => 'NVDA_Training_Date',
+					'value' => ''
+				)
+			)
 		));
 	} else {
 		return null;

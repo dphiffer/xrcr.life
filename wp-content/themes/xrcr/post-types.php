@@ -145,3 +145,26 @@ $args = array(
 	'supports'           => array('title', 'revisions')
 );
 register_post_type('event', $args);
+
+$labels = array(
+	'name'              => 'Event Types',
+	'singular_name'     => 'Event Type',
+	'search_items'      => 'Search Event Types',
+	'all_items'         => 'All Event Types',
+	'parent_item'       => 'Parent Event Type',
+	'parent_item_colon' => 'Parent Event Type:',
+	'edit_item'         => 'Edit Event Type',
+	'update_item'       => 'Update Event Type',
+	'add_new_item'      => 'Add Event Type',
+	'new_item_name'     => 'New Event Type',
+	'menu_name'         => 'Event Types',
+);
+$args = array(
+	'hierarchical'      => true,
+	'labels'            => $labels,
+	'show_ui'           => true,
+	'show_admin_column' => true,
+	'public'            => false,
+	'query_var'         => false
+);
+register_taxonomy('event_type', array('event'), $args);
