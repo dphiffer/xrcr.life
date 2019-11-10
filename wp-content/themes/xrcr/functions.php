@@ -289,7 +289,63 @@ function xrcr_add_custom_column_do_sortable($vars) {
 	return $vars;
 }
 
-function xrcr_get_call_id($page = 1) {
+function xrcr_caller_select() {
+
+	if (! current_user_can('call_contacts')) {
+		// Insufficient privileges (show the volunteer sign up form).
+		return false;
+	}
+
+	$call_type = xrcr_caller_get_type();
+	return empty($call_type);
+}
+
+function xrcr_caller_redirect() {
+
+	if (! current_user_can('call_contacts')) {
+		// Insufficient privileges (show the volunteer sign up form).
+		return false;
+	}
+
+	if (! empty($_GET['call'])) {
+		// Already redirected.
+		return false;
+	}
+
+	$call_type = xrcr_caller_get_type();
+	$call_id = xrcr_caller_pick_id($call_type);
+
+	if (! empty($call_id)) {
+		return site_url("/caller/?call=$call_id&type=$call_type");
+	}
+
+	return false;
+}
+
+function xrcr_caller_valid_types() {
+	return array(
+		'hfe-follow-up'
+	);
+}
+
+function xrcr_caller_get_type() {
+
+	if (empty($_GET['type'])) {
+		return false;
+	}
+
+	if (! in_array($_GET['type'], xrcr_caller_valid_types())) {
+		return false;
+	}
+
+	return $_GET['type'];
+}
+
+function xrcr_caller_pick_id($call_type, $page = 1) {
+
+	if (empty($call_type)) {
+		return null;
+	}
 
 	$contacts = get_posts(array(
 		'post_type' => 'contact',
@@ -315,7 +371,7 @@ function xrcr_get_call_id($page = 1) {
 			'meta_key' => 'contact',
 			'meta_value' => $contact->ID
 		));
-		if (xrcr_was_contact_recently_called($existing_calls)) {
+		if (xrcr_caller_was_recently_called($existing_calls)) {
 			continue;
 		}
 
@@ -329,10 +385,10 @@ function xrcr_get_call_id($page = 1) {
 
 		return $call_id;
 	}
-	return xrcr_get_call_id($page + 1);
+	return xrcr_caller_pick_id($call_type, $page + 1);
 }
 
-function xrcr_was_contact_recently_called($existing_calls) {
+function xrcr_caller_was_recently_called($existing_calls) {
 
 	$skip_contact = false;
 	$age_day = 60 * 60 * 24;
@@ -367,27 +423,25 @@ function xrcr_was_contact_recently_called($existing_calls) {
 	return $skip_contact;
 }
 
-function xrcr_ready_to_call() {
+function xrcr_caller_ready() {
 
 	if (! current_user_can('call_contacts')) {
 		// Insufficient privileges (show the volunteer sign up form)
 		return false;
 	}
 
-	if (! empty($_GET['call'])) {
-		// Already have a call in the works
+	if (empty($_GET['call'])) {
 		return false;
 	}
 
-	$valid_call_types = array(
-		'hfe-follow-up'
-	);
-	if (! empty($_GET['type']) && in_array($_GET['type'], $valid_call_types)) {
-		return $_GET['type'];
+	$type = xrcr_caller_get_type();
+	$call = get_post($_GET['call']);
+
+	if (empty($type) || empty($call)) {
+		return false;
 	}
 
-	// Invalid type, bail out
-	return false;
+	return $type;
 }
 
 function xrcr_migrate_contacts() {

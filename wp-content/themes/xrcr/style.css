@@ -472,6 +472,16 @@ header .p5Canvas {
 	margin-left: 0;
 }
 
+form.call-type {
+	margin-bottom: 2em;
+}
+
+.call-type-description {
+	font-style: italic;
+	margin-left: 1.4em;
+	margin-bottom: 2em;
+}
+
 @media screen and (min-width: 480px) {
 
 	nav .social {

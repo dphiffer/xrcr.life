@@ -1,18 +1,20 @@
 <?php
 
-if ($call_type = xrcr_ready_to_call()) {
-	$call_id = xrcr_get_call_id($call_type);
-	wp_redirect("/caller/?call=$call_id&type=$call_type");
+$redirect = xrcr_caller_redirect();
+if (! empty($redirect)) {
+	wp_redirect($redirect);
 	exit;
 }
 
 acf_form_head();
 get_header();
 
-if (current_user_can('call_contacts') && ! empty($_GET['call'])) {
-	get_template_part('call', 'form');
+if ($type = xrcr_caller_ready()) {
+	get_template_part('caller/call', $type);
+} else if (xrcr_caller_select()) {
+	get_template_part('caller/select');
 } else {
-	get_template_part('call', 'volunteer');
+	get_template_part('caller/volunteer');
 }
 
 get_footer();
