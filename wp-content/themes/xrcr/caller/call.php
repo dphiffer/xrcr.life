@@ -15,7 +15,7 @@ $phone = xrcr_normalize_phone($phone);
 			<span class="last-name"><?php echo get_field('last_name', $contact->ID); ?></span>
 		</h2>
 		<h3><?php echo $phone; ?></h3>
-		<a href="/caller/?type=<?php echo $_GET['type']; ?>" class="button btn-secondary">Next</a>
+		<a href="/caller/?type=<?php echo $_GET['type']; ?>" class="button">Next call</a>
 		<div class="call-details">
 			<?php acf_form(array(
 				'post_id' => $call->ID,
@@ -28,6 +28,10 @@ $phone = xrcr_normalize_phone($phone);
 				'return' => "?call=$call->ID"
 			)); ?>
 		</div>
+	</div>
+</div>
+<div id="contact">
+	<div class="container">
 		<?php acf_form(array(
 			'post_id' => $contact->ID,
 			'fields' => array(
