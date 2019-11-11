@@ -91,6 +91,14 @@ function xrcr_caller_pick_id($call_type, $page = 1) {
 					'key' => 'NVDA_Training_Date',
 					'value' => ''
 				)
+			),
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'attributes',
+					'field' => 'slug',
+					'terms' => 'circle-member',
+					'operator' => 'NOT IN'
+				)
 			)
 		));
 	} else {
