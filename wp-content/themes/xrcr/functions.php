@@ -182,23 +182,6 @@ function xrcr_join() {
 add_action('wp_ajax_xrcr_join', 'xrcr_join');
 add_action('wp_ajax_nopriv_xrcr_join', 'xrcr_join');
 
-function xrcr_normalize_email($email) {
-	$email = trim($email);
-	$email = strtolower($email);
-	return $email;
-}
-
-function xrcr_normalize_phone($phone) {
-	$phone = preg_replace('/\D/', '', $phone);
-	if (substr($phone, 0, 1) == '1') {
-		$phone = substr($phone, 1);
-	}
-	if (strlen($phone) == 10) {
-		$phone = substr($phone, 0, 3) . '-' . substr($phone, 3, 3) . '-' . substr($phone, 6, 4);
-	}
-	return $phone;
-}
-
 function xrcr_add_contact_score_column($columns) {
 	$new_columns = array();
 	foreach ($columns as $key => $value) {
@@ -248,5 +231,5 @@ function xrcr_add_custom_column_do_sortable($vars) {
 }
 
 require_once __DIR__ . '/caller/functions.php';
-require_once __DIR__ . '/lib/assets.php';
+require_once __DIR__ . '/lib/utils.php';
 require_once __DIR__ . '/lib/contacts.php';
