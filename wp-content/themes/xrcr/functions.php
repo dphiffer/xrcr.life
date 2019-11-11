@@ -8,24 +8,6 @@ if (defined('ACF_LITE') && ACF_LITE) {
 	require_once __DIR__ . '/fields.php';
 }
 
-function img_src($src) {
-	$mtime = filemtime(__DIR__ . "/img/$src");
-	$src = get_theme_file_uri("/img/$src?$mtime");
-	echo $src;
-}
-
-function css_href($src) {
-	$mtime = filemtime(__DIR__ . "/$src");
-	$src = get_theme_file_uri("/$src?$mtime");
-	echo $src;
-}
-
-function js_src($src) {
-	$mtime = filemtime(__DIR__ . "/js/$src");
-	$src = get_theme_file_uri("/js/$src?$mtime");
-	echo $src;
-}
-
 function xrcr_after_setup_theme() {
 	add_theme_support('html5', array(
 		'comment-list',
@@ -266,4 +248,5 @@ function xrcr_add_custom_column_do_sortable($vars) {
 }
 
 require_once __DIR__ . '/caller/functions.php';
+require_once __DIR__ . '/lib/assets.php';
 require_once __DIR__ . '/lib/contacts.php';
