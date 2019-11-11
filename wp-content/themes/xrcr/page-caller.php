@@ -13,12 +13,12 @@ if (have_posts()) {
 acf_form_head();
 get_header();
 
+$template_name = 'volunteer';
 if (xrcr_caller_ready()) {
-	get_template_part('caller/call');
+	$template_name = 'form';
 } else if (xrcr_caller_select()) {
-	get_template_part('caller/select');
-} else {
-	get_template_part('caller/volunteer');
+	$template_name = 'start';
 }
 
+get_template_part('caller', $template_name);
 get_footer();
