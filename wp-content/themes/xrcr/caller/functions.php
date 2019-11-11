@@ -131,6 +131,13 @@ function xrcr_caller_pick_id($call_type, $page = 1) {
 			continue;
 		}
 
+		$notes = '';
+		$call_history = xrcr_caller_call_history($contact->ID);
+		if (! empty($call_history)) {
+			$last_call = $call_history[0];
+			$notes = get_field('caller_notes', $last_call->ID);
+		}
+
 		$term = get_term_by('slug', $call_type, 'call_type');
 		$call_id = wp_insert_post(array(
 			'post_title' => "Pending call",
@@ -142,6 +149,7 @@ function xrcr_caller_pick_id($call_type, $page = 1) {
 		));
 		update_field('contact', $contact->ID, $call_id);
 		update_field('status', 'pending', $call_id);
+		update_field('caller_notes', $notes, $call_id);
 		xrcr_caller_save_post($call_id);
 
 		return $call_id;
@@ -249,4 +257,101 @@ function xrcr_caller_ready() {
 	}
 
 	return $call;
+}
+
+function xrcr_caller_context($call, $call_type_term) {
+
+	$contact_id = get_field('contact', $call->ID);
+	$context = array();
+
+	$event_fields = array(
+		'HFE_Talk_Date' => 'HFE Talk',
+		'HFE_Trained_Date' => 'HFE Talk Training',
+		'NVDA_Training_Date' => 'NVDA Training',
+		'NVDATrainerTraining_Date' => 'NVDA Trainer Training'
+	);
+	foreach ($event_fields as $event_field => $event_name) {
+		$date = get_field($event_field, $contact_id);
+		if (! empty($date)) {
+			$icon = '<i class="fa fa-check-circle"></i>';
+			$time = strtotime($date);
+			$date = date('M j, Y', $time);
+			$context[$time] = "$icon Attended an $event_name on <b>$date</b>.";
+		}
+	}
+
+	if (! empty($call_type_term)) {
+		if ($call_type_term->slug == 'hfe-follow-up') {
+			$nvda_events = xrcr_caller_upcoming_nvda_events();
+			if (! empty($nvda_events)) {
+				$icon = '<i class="fa fa-calendar-alt"></i>';
+				$date = get_field('time', $nvda_events[0]->ID);
+				$time = strtotime($date);
+				$date = date('M j, Y', $time);
+				$link = '<a href="/#events" target="_blank">Next NVDA training</a>';
+				$context[$time] = "$icon $link is on <b>$date</b>.";
+			}
+		}
+	}
+
+	$call_history = xrcr_caller_call_history($contact_id);
+	if (! empty($call_history)) {
+		foreach ($call_history as $call) {
+			$icon = '<i class="fa fa-phone-alt"></i>';
+			$caller = get_user_by('ID', $call->post_author);
+			if (! empty($caller)) {
+				$caller = $caller->user_login;
+			} else {
+				$caller = 'unknown';
+			}
+			$link = "<a href=\"/caller/?call=$call->ID\">Called by $caller</a>";
+			$time = strtotime($call->post_date);
+			$date = date('M j, Y', $time);
+			$context[$time] = "$icon $link on <b>$date</b></a>.";
+		}
+	}
+
+	ksort($context);
+	return $context;
+}
+
+function xrcr_caller_call_history($contact_id) {
+	return get_posts(array(
+		'post_type' => 'call',
+		'posts_per_page' => -1,
+		'meta_query' => array(
+			array(
+				'key' => 'contact',
+				'value' => $contact_id
+			),
+			array(
+				'key' => 'status',
+				'value' => 'called'
+			)
+		)
+	));
+}
+
+function xrcr_caller_upcoming_nvda_events() {
+	return get_posts(array(
+		'post_type' => 'event',
+		'posts_per_page' => 1,
+		'meta_key' => 'time',
+		'orderby' => 'meta_value',
+		'order' => 'ASC',
+		'meta_query' => array(
+			array(
+				'key' => 'time',
+				'compare' => '>=',
+				'value' => current_time("Y-m-d 00:00:00")
+			)
+		),
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'event_type',
+				'field' => 'slug',
+				'terms' => 'nvda-training',
+			)
+		)
+	));
 }

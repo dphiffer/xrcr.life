@@ -3,12 +3,10 @@
 $call_id = $_GET['call'];
 $call = get_post($call_id);
 
-$call_type = 'unknown';
+$call_type_term = null;
 $call_type_terms = get_the_terms($call, 'call_type');
 if (! empty($call_type_terms)) {
-	$call_type = $call_type_terms[0]->slug;
-	$call_type_name = $call_type_terms[0]->name;
-	$call_type_description = $call_type_terms[0]->description;
+	$call_type_term = $call_type_terms[0];
 }
 
 $contact_id = get_field('contact', $call_id);
@@ -27,57 +25,25 @@ $phone = xrcr_normalize_phone($phone);
 		</h2>
 		<h3><?php echo $phone; ?></h3>
 		<div class="nav-buttons">
-			<a href="/caller/?type=<?php echo $call_type; ?>" class="button">Next call</a>
+			<?php if (! empty($call_type_term)) { ?>
+				<a href="/caller/?type=<?php echo $call_type_term->slug; ?>" class="button">Next call</a>
+			<?php } ?>
 			<a href="/caller/" class="button btn-secondary">Done</a>
 			<br class="clear">
 		</div>
 		<div class="call-context">
 			<?php
 
-			echo "<h4>$call_type_name</h4>\n";
-			echo "<p>$call_type_description</p>\n";
-
-			$event_fields = array(
-				'HFE_Talk_Date' => 'HFE Talk',
-				'HFE_Trained_Date' => 'HFE Talk Training',
-				'NVDA_Training_Date' => 'NVDA Training',
-				'NVDATrainerTraining_Date' => 'NVDA Trainer Training'
-			);
-			foreach ($event_fields as $event_field => $event_name) {
-				$date = get_field($event_field, $contact_id);
-				if (! empty($date)) {
-					$date = date('M j, Y', strtotime($date));
-					echo "<p><i class=\"fa fa-check-circle\"></i> Attended an $event_name on <strong>$date</strong>.</p>\n";
-				}
+			if (! empty($call_type_term)) {
+				echo "<h4>$call_type_term->name</h4>\n";
+				echo "<p>$call_type_term->description</p>\n";
+			} else {
+				echo "<h4>Context</h4>\n";
 			}
 
-			if ($call_type == 'hfe-follow-up') {
-				$nvda_events = get_posts(array(
-					'post_type' => 'event',
-					'posts_per_page' => 1,
-					'meta_key' => 'time',
-					'orderby' => 'meta_value',
-					'order' => 'ASC',
-					'meta_query' => array(
-						array(
-							'key' => 'time',
-							'compare' => '>=',
-							'value' => current_time("Y-m-d 00:00:00")
-						)
-					),
-					'tax_query' => array(
-						array(
-							'taxonomy' => 'event_type',
-							'field' => 'slug',
-							'terms' => 'nvda-training',
-						)
-					)
-				));
-				if (! empty($nvda_events)) {
-					$date = get_field('time', $nvda_events[0]->ID);
-					$date = date('M j, Y', strtotime($date));
-					echo "<p><i class=\"fa fa-calendar-alt\"></i> Next NVDA training is on <strong>$date</strong>.</p>\n";
-				}
+			$context = xrcr_caller_context($call, $call_type_term);
+			foreach ($context as $item) {
+				echo "<p>$item</p>\n";
 			}
 
 			?>
