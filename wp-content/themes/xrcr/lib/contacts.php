@@ -230,7 +230,16 @@ function xrcr_contacts_export() {
 	foreach ($posts as $post) {
 		$row = array();
 		foreach ($headers as $field_name) {
-			$row[] = get_field($field_name, $post->ID);
+			$value = get_field($field_name, $post->ID);
+			if (is_array($value)) {
+				if (empty($value)) {
+					$value = '';
+				} else {
+					$value = array_values($value);
+					$value = array_shift($value);
+				}
+			}
+			$row[] = $value;
 		}
 		fputcsv($fh, $row);
 	}
@@ -241,7 +250,7 @@ function xrcr_contacts_export() {
 
 function xrcr_contacts_csv_headers() {
 
-	$fields_path = dirname(__DIR__) . '/fields.json';
+	$fields_path = dirname(__DIR__) . '/lib/fields.json';
 	if (! file_exists($fields_path)) {
 		echo "Error: could not find fields.json\n";
 		exit;
