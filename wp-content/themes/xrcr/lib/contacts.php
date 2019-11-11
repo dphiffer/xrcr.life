@@ -156,13 +156,18 @@ function xrcr_contacts_import($args) {
 	echo "Loading {$args[0]}...\n";
 	$fh = fopen($args[0], 'r');
 
-	$expected_headers = xrcr_contacts_csv_headers();
-	$headers = fgetcsv($fh);
+	$field_headers = xrcr_contacts_csv_headers();
+	$csv_headers = fgetcsv($fh);
 
-	foreach ($expected_headers as $index => $field_name) {
-		if ($headers[$index] != $field_name) {
-			echo "Error: CSV headers did not match ({$headers[$index]} instead of $field_name)\n";
-			exit;
+	// [csv column index]  => [field name]
+	$field_map = array();
+
+	foreach ($csv_headers as $field_name) {
+		if (in_array($field_name, $field_headers)) {
+			$field_map[] = $field_name;
+		} else {
+			$field_map[] = null;
+			echo "Warning: ignoring CSV column $field_name\n";
 		}
 	}
 
@@ -184,7 +189,8 @@ function xrcr_contacts_import($args) {
 
 	while ($row = fgetcsv($fh)) {
 
-		$email = xrcr_normalize_email($row[2]);
+		$email_index = array_search('email', $csv_headers);
+		$email = xrcr_normalize_email($row[$email_index]);
 
 		if (! empty($lookup[$email])) {
 			$post_id = $lookup[$email];
@@ -192,25 +198,31 @@ function xrcr_contacts_import($args) {
 		} else {
 			$post_id = wp_insert_post(array(
 				'post_type' => 'contact',
+				'post_title' => 'Contact import',
 				'post_status' => 'publish'
 			));
 			$created++;
 		}
 
 		if (! empty($post_id)) {
-			foreach ($headers as $index => $field_name) {
-				if (substr($field_name, -5, 5) == '_name') {
-					$row[$index] = trim($row[$index]);
-				} else if (substr($field_name, -5, 5) == '_Date' && ! empty($row[$index])) {
-					$row[$index] = date('Y/m/d', strtotime($row[$index]));
+			foreach ($csv_headers as $index => $field_name) {
+				if (! empty($field_map[$index])) {
+					$value = $row[$index];
+					if (substr($field_name, -5, 5) == '_name') {
+						$value = trim($value);
+					} else if (substr($field_name, -5, 5) == '_Date' && ! empty($value)) {
+						$value = date('Y/m/d', strtotime($value));
+					}
+					update_field($field_name, $value, $post_id);
 				}
-				update_field($field_name, $row[$index], $post_id);
 			}
 			xrcr_update_contact($post_id);
 		}
+
+		echo ".";
 	}
 
-	echo "$updated existing contacts\n";
+	echo "\n$updated existing contacts\n";
 	echo "$created new contacts\n";
 	exit;
 }
