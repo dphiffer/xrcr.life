@@ -1,5 +1,97 @@
 <?php
 
+function xrcr_get_contact_id($email) {
+
+	if (empty($email)) {
+		return null;
+	}
+	$email = xrcr_normalize_email($email);
+
+	global $wpdb;
+	$post_id = $wpdb->get_var($wpdb->prepare("
+		SELECT post_id
+		FROM wp_postmeta
+		WHERE meta_key = 'email'
+		  AND meta_value = %s
+	", $email));
+
+	if (empty($post_id)) {
+		return null;
+	}
+
+	return intval($post_id);
+}
+
+function xrcr_update_contact($post_id) {
+
+	// Sets the post_title and normalizes the email address, and assigns a score
+	// based on volunteering availability.
+
+	$post_type = get_post_type($post_id);
+	if ($post_type != 'contact') {
+		return $post_id;
+	}
+
+	$first_name = trim(get_field('first_name', $post_id));
+	$last_name = trim(get_field('last_name', $post_id));
+	$email = get_field('email', $post_id);
+	$normalized_email = xrcr_normalize_email($email);
+
+	if ($email != $normalized_email) {
+		$email = $normalized_email;
+		update_field('email', $email, $post_id);
+	}
+
+	$post_title = "$last_name, $first_name";
+	if (empty($last_name)) {
+		$post_title = $first_name;
+	}
+	if (empty($first_name)) {
+		$post_title = $email;
+	}
+
+	$score = xrcr_get_contact_score($post_id);
+	update_post_meta($post_id, '_score', $score);
+
+	// Avoid infinite loops
+	remove_action('save_post', 'xrcr_update_contact');
+
+	wp_update_post(array(
+		'ID' => $post_id,
+		'post_title' => $post_title
+	));
+
+	// Ok, we should've avoided an infinite loop
+	add_action('save_post', 'xrcr_update_contact');
+
+	return $post_id;
+}
+add_action('save_post', 'xrcr_update_contact');
+
+function xrcr_get_contact_score($post_id) {
+	$score = 0;
+	$fields = get_fields($post_id);
+	if (empty($fields)) {
+		return $score;
+	}
+	foreach ($fields as $field => $value) {
+		if ($field == 'Avail_E_events' && ! empty($value)) {
+			$score += 1;
+		} else if ($field == 'Avail_D_projects' && ! empty($value)) {
+			$score += 2;
+		} else if ($field == 'Avail_C_2-3hrs/wk' && ! empty($value)) {
+			$score += 2;
+		} else if ($field == 'Avail_B_4-8hrs/wk' && ! empty($value)) {
+			$score += 4;
+		} else if ($field == 'Avail_A_8+hrs/wk' && ! empty($value)) {
+			$score += 8;
+		} else if (substr($field, 0, 8) == 'Interest' && ! empty($value)) {
+			$score += 1;
+		}
+	}
+	return $score;
+}
+
 function xrcr_contacts_migrate() {
 
 	global $wpdb;
