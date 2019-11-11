@@ -8,7 +8,7 @@ if (defined('ACF_LITE') && ACF_LITE) {
 	require_once __DIR__ . '/lib/fields.php';
 }
 
-require_once __DIR__ . '/caller/functions.php';
+require_once __DIR__ . '/lib/caller.php';
 require_once __DIR__ . '/lib/columns.php';
 require_once __DIR__ . '/lib/contacts.php';
 require_once __DIR__ . '/lib/join.php';

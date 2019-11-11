@@ -22,7 +22,7 @@ $redirect = urlencode(site_url('/caller/'));
 				<p>Note that all the form fields are required.</p>
 			<?php } else { ?>
 				<h2>Hello, rebel caller</h2>
-				<p>Sign up to join us as a volunteer <a href="<?php echo get_theme_file_uri('caller/meetings.gif'); ?>">XR rebel caller</a>.</p>
+				<p>Sign up to join us as a volunteer XR rebel caller.</p>
 			<?php } ?>
 			<p><strong>Already signed up? <a href="<?php echo site_url("/wp-login.php?redirect_to=$redirect"); ?>">Login</a></strong></p>
 			<label for="name">
