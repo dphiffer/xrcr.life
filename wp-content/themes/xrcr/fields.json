@@ -222,9 +222,9 @@
                 "maxlength": ""
             },
             {
-                "key": "field_5d7c554fded42",
-                "label": "Email",
-                "name": "email",
+                "key": "field_5d7c5491338cd",
+                "label": "Phone",
+                "name": "Phone",
                 "type": "text",
                 "instructions": "",
                 "required": 0,
@@ -260,9 +260,9 @@
                 "maxlength": ""
             },
             {
-                "key": "field_5d7c5491338cd",
-                "label": "Phone",
-                "name": "Phone",
+                "key": "field_5d7c554fded42",
+                "label": "Email",
+                "name": "email",
                 "type": "text",
                 "instructions": "",
                 "required": 0,
@@ -279,54 +279,8 @@
                 "maxlength": ""
             },
             {
-                "key": "field_5d7c5731297d9",
-                "label": "Actions",
-                "name": "Interest_Actions",
-                "type": "checkbox",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "choices": {
-                    "1": "Interested in Actions"
-                },
-                "allow_custom": 0,
-                "default_value": [],
-                "layout": "vertical",
-                "toggle": 0,
-                "return_format": "value",
-                "save_custom": 0
-            },
-            {
-                "key": "field_5d7c577c3fe83",
-                "label": "Art",
-                "name": "Interest_Art",
-                "type": "checkbox",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "choices": {
-                    "1": "Interested in Art"
-                },
-                "allow_custom": 0,
-                "default_value": [],
-                "layout": "vertical",
-                "toggle": 0,
-                "return_format": "value",
-                "save_custom": 0
-            },
-            {
                 "key": "field_5d7c56064e7fd",
-                "label": "HFE Host",
+                "label": "Host a talk",
                 "name": "Interest_HFE_Host",
                 "type": "checkbox",
                 "instructions": "",
@@ -338,7 +292,7 @@
                     "id": ""
                 },
                 "choices": {
-                    "1": "Interested in being a HFE host"
+                    "1": "I'm interested in hosting this talk in my home or community space"
                 },
                 "allow_custom": 0,
                 "default_value": [],
@@ -348,9 +302,9 @@
                 "save_custom": 0
             },
             {
-                "key": "field_5dbdcefc160a9",
-                "label": "Infrastructure",
-                "name": "Interest_Infrastructure",
+                "key": "field_5dc8bc5afcf5e",
+                "label": "NVDA training",
+                "name": "Interest_NVDA",
                 "type": "checkbox",
                 "instructions": "",
                 "required": 0,
@@ -361,7 +315,7 @@
                     "id": ""
                 },
                 "choices": {
-                    "1": "Interested in Infrastructure"
+                    "1": "I can attend the next nonviolent direct action (NVDA) training"
                 },
                 "allow_custom": 0,
                 "default_value": [],
@@ -371,9 +325,9 @@
                 "save_custom": 0
             },
             {
-                "key": "field_5dbdcf34160aa",
-                "label": "Media",
-                "name": "Interest_Media",
+                "key": "field_5dbdd388160b0",
+                "label": "Risk Arrest",
+                "name": "Willing_Arrested",
                 "type": "checkbox",
                 "instructions": "",
                 "required": 0,
@@ -384,7 +338,76 @@
                     "id": ""
                 },
                 "choices": {
-                    "1": "Interested in Media & Messaging"
+                    "1": "I'm willing to risk arrest"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
+            },
+            {
+                "key": "field_5dbdd3dd160b1",
+                "label": "Risk Prison",
+                "name": "Willing_Prison",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "1": "I'm willing to go to prison"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
+            },
+            {
+                "key": "field_5d7c5731297d9",
+                "label": "Interest: Actions",
+                "name": "Interest_Actions",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "1": "actions and logistics"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
+            },
+            {
+                "key": "field_5d7c577c3fe83",
+                "label": "Interest: Art",
+                "name": "Interest_Art",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "1": "art making"
                 },
                 "allow_custom": 0,
                 "default_value": [],
@@ -395,7 +418,7 @@
             },
             {
                 "key": "field_5d7c57af7842a",
-                "label": "Outreach",
+                "label": "Interest: Outreach",
                 "name": "Interest_Outreach",
                 "type": "checkbox",
                 "instructions": "",
@@ -407,7 +430,7 @@
                     "id": ""
                 },
                 "choices": {
-                    "1": "Interested in Outreach"
+                    "1": "outreach and training"
                 },
                 "allow_custom": 0,
                 "default_value": [],
@@ -418,7 +441,7 @@
             },
             {
                 "key": "field_5dbdcf79160ab",
-                "label": "Regen",
+                "label": "Interest: Regen",
                 "name": "Interest_Regen",
                 "type": "checkbox",
                 "instructions": "",
@@ -430,7 +453,7 @@
                     "id": ""
                 },
                 "choices": {
-                    "1": "Interested in Regenerative Culture"
+                    "1": "regenerative culture"
                 },
                 "allow_custom": 0,
                 "default_value": [],
@@ -440,9 +463,9 @@
                 "save_custom": 0
             },
             {
-                "key": "field_5da4e1d88659c",
-                "label": "Availability: A",
-                "name": "Avail_A_8+hrs\/wk",
+                "key": "field_5dbdcf34160aa",
+                "label": "Interest: Media",
+                "name": "Interest_Media",
                 "type": "checkbox",
                 "instructions": "",
                 "required": 0,
@@ -453,76 +476,7 @@
                     "id": ""
                 },
                 "choices": {
-                    "1": "8+ hours\/week"
-                },
-                "allow_custom": 0,
-                "default_value": [],
-                "layout": "vertical",
-                "toggle": 0,
-                "return_format": "value",
-                "save_custom": 0
-            },
-            {
-                "key": "field_5dbdd027160ac",
-                "label": "Availability: B",
-                "name": "Avail_B_4-8hrs\/wk",
-                "type": "checkbox",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "choices": {
-                    "1": "4-8 hours\/week"
-                },
-                "allow_custom": 0,
-                "default_value": [],
-                "layout": "vertical",
-                "toggle": 0,
-                "return_format": "value",
-                "save_custom": 0
-            },
-            {
-                "key": "field_5dbdd045160ad",
-                "label": "Availability: C",
-                "name": "Avail_C_2-3hrs\/wk",
-                "type": "checkbox",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "choices": {
-                    "1": "2-3 hours\/week"
-                },
-                "allow_custom": 0,
-                "default_value": [],
-                "layout": "vertical",
-                "toggle": 0,
-                "return_format": "value",
-                "save_custom": 0
-            },
-            {
-                "key": "field_5dbdd0ea160ae",
-                "label": "Availability: D",
-                "name": "Avail_D_projects",
-                "type": "checkbox",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "choices": {
-                    "1": "Can help with art builds"
+                    "1": "media & messaging"
                 },
                 "allow_custom": 0,
                 "default_value": [],
@@ -533,7 +487,7 @@
             },
             {
                 "key": "field_5dbdd10d160af",
-                "label": "Availability: E",
+                "label": "Availability: Events",
                 "name": "Avail_E_events",
                 "type": "checkbox",
                 "instructions": "",
@@ -545,7 +499,7 @@
                     "id": ""
                 },
                 "choices": {
-                    "1": "Can come to our events"
+                    "1": "Come to events and work parties"
                 },
                 "allow_custom": 0,
                 "default_value": [],
@@ -555,9 +509,9 @@
                 "save_custom": 0
             },
             {
-                "key": "field_5d7c589178431",
-                "label": "Transportation help",
-                "name": "Transportation_Help",
+                "key": "field_5dbdd0ea160ae",
+                "label": "Availability: Projects",
+                "name": "Avail_D_projects",
                 "type": "checkbox",
                 "instructions": "",
                 "required": 0,
@@ -568,7 +522,76 @@
                     "id": ""
                 },
                 "choices": {
-                    "1": "Needs transportation help"
+                    "1": "Take on a project here and there"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
+            },
+            {
+                "key": "field_5dbdd045160ad",
+                "label": "Availability: 2-3 hours",
+                "name": "Avail_C_2-3hrs\/wk",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "1": "2-3 hours per week"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
+            },
+            {
+                "key": "field_5dbdd027160ac",
+                "label": "Availability: 4-8 hours",
+                "name": "Avail_B_4-8hrs\/wk",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "1": "4-8 hours per week"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
+            },
+            {
+                "key": "field_5da4e1d88659c",
+                "label": "Availability: 8+ hours",
+                "name": "Avail_A_8+hrs\/wk",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "1": "8+ hours per week"
                 },
                 "allow_custom": 0,
                 "default_value": [],
@@ -579,7 +602,7 @@
             },
             {
                 "key": "field_5d7c58517842f",
-                "label": "Skills",
+                "label": "Skills and talents you'd like to offer",
                 "name": "Skills_Text",
                 "type": "textarea",
                 "instructions": "",
@@ -614,95 +637,6 @@
                 "maxlength": "",
                 "rows": 3,
                 "new_lines": ""
-            },
-            {
-                "key": "field_5dbdd388160b0",
-                "label": "Arrest",
-                "name": "Willing_Arrested",
-                "type": "checkbox",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "choices": {
-                    "1": "Willing to risk arrest"
-                },
-                "allow_custom": 0,
-                "default_value": [],
-                "layout": "vertical",
-                "toggle": 0,
-                "return_format": "value",
-                "save_custom": 0
-            },
-            {
-                "key": "field_5dbdd3dd160b1",
-                "label": "Prison",
-                "name": "Willing_Prison",
-                "type": "checkbox",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "choices": {
-                    "1": "Willing to risk imprisonment"
-                },
-                "allow_custom": 0,
-                "default_value": [],
-                "layout": "vertical",
-                "toggle": 0,
-                "return_format": "value",
-                "save_custom": 0
-            },
-            {
-                "key": "field_5dbdd40f160b2",
-                "label": "Tags",
-                "name": "can2_user_tags",
-                "type": "text",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
-            },
-            {
-                "key": "field_5dbdd42a160b3",
-                "label": "Subscription status",
-                "name": "can2_subscription_status",
-                "type": "radio",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "choices": {
-                    "subscribed": "Subscribed",
-                    "unsubscribed": "Unsubscribed"
-                },
-                "allow_null": 0,
-                "other_choice": 0,
-                "default_value": "",
-                "layout": "vertical",
-                "return_format": "value",
-                "save_other_choice": 0
             },
             {
                 "key": "field_5dc6ed1857d22",
@@ -771,6 +705,72 @@
                 "display_format": "Y\/m\/d",
                 "return_format": "Y\/m\/d",
                 "first_day": 0
+            },
+            {
+                "key": "field_5d7c589178431",
+                "label": "Transportation help",
+                "name": "Transportation_Help",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "1": "Needs transportation help"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
+            },
+            {
+                "key": "field_5dbdd40f160b2",
+                "label": "Tags",
+                "name": "can2_user_tags",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5dbdd42a160b3",
+                "label": "Subscription status",
+                "name": "can2_subscription_status",
+                "type": "radio",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "subscribed": "Subscribed",
+                    "unsubscribed": "Unsubscribed"
+                },
+                "allow_null": 0,
+                "other_choice": 0,
+                "default_value": "",
+                "layout": "vertical",
+                "return_format": "value",
+                "save_other_choice": 0
             }
         ],
         "location": [
