@@ -15,14 +15,22 @@ $contact = get_post($contact_id);
 $first_name = get_field('first_name', $contact->ID);
 $last_name = get_field('last_name', $contact->ID);
 
+$name = "<i>No name on file</i>";
+if (! empty($first_name)) {
+	$name = $first_name;
+	if (! empty($last_name)) {
+		$last_initial = substr($last_name, 0, 1);
+		$name = "$first_name $last_initial.";
+	}
+}
+
 $phone = get_field('Phone', $contact->ID);
 $phone = xrcr_normalize_phone($phone);
 
 ?>
 <div id="call">
 	<div class="container">
-		<h2><?php echo $first_name; ?><span class="last-name"> <?php echo $last_name; ?></span>
-		</h2>
+		<h2><?php echo $name ?></h2>
 		<h3><?php echo $phone; ?></h3>
 		<div class="nav-buttons">
 			<?php if (! empty($call_type_term)) { ?>
