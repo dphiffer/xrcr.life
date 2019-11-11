@@ -446,17 +446,28 @@ header .p5Canvas {
 	display: block;
 }
 
-#call .acf-fields > .acf-field {
+#acf-form .acf-fields > .acf-field {
 	border-top: 0;
 	padding: 20px 0 0 0;
 }
 
 #contact .acf-fields > .acf-field {
-	padding: 10px 0;
+	padding: 0;
 }
 
-#call .acf-form-submit {
+#contact .acf-field-checkbox {
+	padding: 0;
+}
+
+#acf-form .acf-form-submit {
 	padding-top: 30px;
+}
+
+#contact .acf-fields > .acf-field[data-name="Interest_HFE_Host"]::before {
+	display: block;
+	content: "Contact details";
+	padding-bottom: 10px;
+	margin-top: 20px;
 }
 
 #contact .acf-fields > .acf-field[data-name="Interest_Actions"]::before {
@@ -466,7 +477,7 @@ header .p5Canvas {
 	margin-top: 20px;
 }
 
-#contact .acf-fields > .acf-field[data-name="Avail_A_8+hrs/wk"]::before {
+#contact .acf-fields > .acf-field[data-name="Avail_E_events"]::before {
 	display: block;
 	content: "Availability";
 	padding-bottom: 10px;
@@ -495,12 +506,6 @@ header .p5Canvas {
 	content: "Heard about XR";
 	padding-bottom: 10px;
 	margin-top: 10px;
-}
-
-#contact .acf-fields > .acf-field[data-name="Willing_Arrested"] {
-	font-size: 2em;
-	padding: 10px 0 20px 0;
-	border-top: 0;
 }
 
 #contact .acf-fields > .acf-field > .acf-label {
@@ -570,7 +575,7 @@ header .p5Canvas {
 	margin-bottom: 0.5em;
 }
 
-.calls-done {
+.feedback {
 	background: rgba(0, 0, 0, 0.2);
 	padding: 20px;
 	margin: 10px 0 20px 0;

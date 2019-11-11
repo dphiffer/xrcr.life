@@ -7,7 +7,7 @@
 		if (! empty($_GET['done'])) {
 			$term = get_term_by('slug', $_GET['done'], 'call_type');
 			if (! empty($term)) {
-				echo "<div class=\"calls-done\">\n";
+				echo "<div class=\"feedback\">\n";
 				echo "<h4><i class=\"fa fa-check\"></i> All done with $term->name calls!</h4>\n";
 				echo "</div>\n";
 			}

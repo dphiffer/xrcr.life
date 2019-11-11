@@ -39,6 +39,7 @@ if (! empty($cta_content)) {
 	echo "<div class=\"main\">\n";
 }
 
+?><h2><?php the_title(); ?></h2><?php
 the_content();
 
 if (! empty($cta_content)) {
