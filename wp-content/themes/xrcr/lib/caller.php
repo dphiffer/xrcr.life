@@ -30,8 +30,8 @@ function xrcr_caller_select() {
 function xrcr_caller_redirect() {
 
 	if (! current_user_can('call_contacts')) {
-		// Insufficient privileges (show the volunteer sign up form).
-		return false;
+		$redirect = urlencode(site_url('/caller/'));
+		return site_url("/wp-login.php?redirect_to=$redirect");
 	}
 
 	if (! empty($_GET['call'])) {
