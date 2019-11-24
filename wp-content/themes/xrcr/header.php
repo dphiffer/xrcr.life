@@ -31,12 +31,26 @@
 	</head>
 	<body <?php body_class(); ?>>
 		<nav>
+			<a href="/" id="mobile-nav-button"><i class="fa fa-bars"></i></a>
 			<a href="/" class="identity">
 				XR Capital Region
 			</a>
+			<?php wp_nav_menu(array(
+				'theme_location' => 'nav-bar'
+			)); ?>
 			<div class="social">
 				<a href="https://www.instagram.com/xrcrlife/"><i class="fab fa-instagram"></i></a>
 				<a href="https://www.facebook.com/xrcrlife/"><i class="fab fa-facebook-f"></i></a>
 				<a href="https://twitter.com/xrcrlife"><i class="fab fa-twitter"></i></a>
+			</div>
+			<div id="mobile-nav" class="hidden">
+				<?php wp_nav_menu(array(
+					'theme_location' => 'nav-bar'
+				)); ?>
+				<div class="social">
+					<a href="https://www.instagram.com/xrcrlife/"><i class="fab fa-instagram"></i></a>
+					<a href="https://www.facebook.com/xrcrlife/"><i class="fab fa-facebook-f"></i></a>
+					<a href="https://twitter.com/xrcrlife"><i class="fab fa-twitter"></i></a>
+				</div>
 			</div>
 		</nav>

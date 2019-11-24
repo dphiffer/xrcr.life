@@ -298,16 +298,22 @@ nav {
 nav a {
 	color: #000;
 	font-family: "FucXed", sans-serif;
-	font-size: 24px;
+	font-size: 16px;
 	text-transform: uppercase;
 	text-decoration: none;
-	margin-right: 20px;
+	margin-right: 12px;
+	word-spacing: -50%;
+	letter-spacing: 0.05rem;
+}
+
+nav .menu-navigation-bar-container {
+	display: none;
 }
 
 nav .social {
 	position: absolute;
 	right: 20px;
-	bottom: 20px;
+	top: 20px;
 	display: none;
 }
 
@@ -599,19 +605,92 @@ header .p5Canvas {
 	font-size: 1.25em;
 }
 
+#mobile-nav-button {
+	display: inline-block;
+	width: 15px;
+}
+
+#mobile-nav .menu-navigation-bar-container {
+	display: block;
+}
+
+#mobile-nav .menu li {
+	list-style: none;
+	margin-left: 30px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+#mobile-nav {
+	position: relative;
+	padding-bottom: 45px;
+}
+
+#mobile-nav .social {
+	display: block;
+	top: auto;
+	bottom: 0;
+	left: 24px;
+	right: auto;
+}
+
 @media screen and (min-width: 480px) {
+
+	nav a {
+		font-size: 20px;
+		margin-right: 18px;
+	}
 
 	nav .social {
 		display: block;
+	}
+
+	nav #mobile-nav .social {
+		display: none;
 	}
 
 	header.mini {
 		height: 260px;
 	}
 
+	#mobile-nav {
+		padding-bottom: 0;
+	}
+
+	#mobile-nav .menu li {
+		margin-left: 37px;
+	}
+
 }
 
 @media screen and (min-width: 760px) {
+
+	nav a {
+		font-size: 24px;
+		margin-right: 20px;
+	}
+
+	#mobile-nav-button,
+	#mobile-nav {
+		display: none;
+	}
+
+	nav .menu-navigation-bar-container,
+	nav .menu,
+	nav .menu li {
+		list-style: none;
+		display: inline;
+		margin: 0;
+	}
+
+	nav .menu li {
+		font-size: 16px;
+		text-transform: uppercase;
+	}
+
+	nav .menu li a {
+		font-size: 16px;
+	}
 
 	form .column {
 		width: 50%;

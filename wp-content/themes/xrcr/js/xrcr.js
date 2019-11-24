@@ -117,6 +117,16 @@ function setup_join_form() {
 	});
 }
 
+function setup_mobile_nav() {
+	$('#mobile-nav-button').click(function(e) {
+		e.preventDefault();
+		$('#mobile-nav').toggleClass('hidden');
+		$('#mobile-nav-button .fa').toggleClass('fa-bars');
+		$('#mobile-nav-button .fa').toggleClass('fa-times');
+	});
+}
+
 $(document).ready(function() {
 	setup_join_form();
+	setup_mobile_nav();
 });

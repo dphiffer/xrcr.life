@@ -18,6 +18,7 @@ function xrcr_init() {
 	require_once __DIR__ . '/lib/post-types.php';
 	require_once __DIR__ . '/lib/roles.php';
 	register_nav_menu('footer-menu', 'Footer');
+	register_nav_menu('nav-bar', 'Navigation bar');
 }
 add_action('init', 'xrcr_init');
 
