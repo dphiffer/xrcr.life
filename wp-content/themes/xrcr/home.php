@@ -14,8 +14,10 @@ get_template_part('banner');
 	<div class="container">
 		<img src="<?php img_src('xr-logo.svg'); ?>" alt="Extinction Rebellion" width="300" class="logo">
 		<p>We are facing an unprecedented global emergency. Life on Earth is in crisis: scientists agree we have entered a period of abrupt climate breakdown, and we are in the midst of a mass extinction of our own making.</p>
-		<a href="https://www.youtube.com/watch?v=n__y1FXK_jE" class="button">Watch The talk <i class="fab fa-youtube"></i></a>
-		<p><i>Heading for Extinction<br>(And what to do about it)</i></p>
+		<a href="https://www.youtube.com/watch?v=b2VkC4SnwY0" class="button">Watch The talk <i class="fab fa-youtube"></i></a>
+		<p><i>Heading for Extinction (And what to do about it)</i></p>
+		<a href="https://xrcr.life/media/2019/11/rebel-starter-pack.pdf" class="button">Rebel Starter Pack <i class="fa fa-file-pdf"></i></a>
+		<p><i>Download the Rebel Starter Pack to learn more.</i></p>
 	</div>
 </div>
 <?php get_template_part('join-form'); ?>
