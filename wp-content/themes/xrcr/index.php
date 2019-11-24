@@ -8,22 +8,7 @@ if (! have_posts()) {
 the_post();
 get_header();
 
-global $post;
-
-if (has_post_thumbnail($post->ID)) {
-
-	$attachment_id = get_post_thumbnail_id($post->ID);
-	list($image) = wp_get_attachment_image_src($attachment_id, 'fullsize');
-
-	?>
-	<header class="image-bg" style="background-image: url('<?php echo $image; ?>');"></header>
-<?php } else { ?>
-<header class="mini">
-	<div id="canvas"></div>
-</header>
-<?php
-
-}
+get_template_part('banner');
 
 $cta_content = get_field('cta_content');
 $container_class = 'container';
