@@ -943,6 +943,25 @@
                 "prepend": "",
                 "append": "",
                 "maxlength": ""
+            },
+            {
+                "key": "field_5ddb38e25681e",
+                "label": "HFE presenter",
+                "name": "hfe_presenter",
+                "type": "text",
+                "instructions": "(optional, used for follow-up calls only)",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
             }
         ],
         "location": [
