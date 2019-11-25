@@ -283,8 +283,9 @@ function xrcr_caller_context($call, $call_type_term) {
 		if (! empty($date)) {
 			$icon = '<i class="fa fa-check-circle"></i>';
 			$time = strtotime($date);
-			$date = date('M j, Y', $time);
-			$context[$time] = "$icon Attended an $event_name on <b>$date</b>.";
+			$display_date = date('M j, Y', $time);
+			$event_context = xrcr_caller_event_context($event_field, $date);
+			$context[$time] = "$icon Attended an $event_name on <b>$display_date</b>$event_context.";
 		}
 	}
 
@@ -320,6 +321,47 @@ function xrcr_caller_context($call, $call_type_term) {
 	}
 
 	ksort($context);
+	return $context;
+}
+
+function xrcr_caller_event_context($event_field, $date) {
+	if ($event_field != 'HFE_Talk_Date') {
+		return '';
+	}
+
+	$time = strtotime($date);
+	$date_like = '^' . date('Y-m-d', $time);
+
+	$hfe_query = new WP_Query(array(
+		'post_type' => 'event',
+		'meta_query' => array(
+			array(
+				'key' => 'time',
+				'value' => $date_like,
+				'compare' => 'REGEXP'
+			)
+		)
+	));
+	$hfe_posts = $hfe_query->posts;
+
+	$context = '';
+
+	if (! empty($hfe_posts)) {
+		$hfe_post = $hfe_posts[0];
+		$hfe_presenter = get_field('hfe_presenter', $hfe_post->ID);
+		$location = get_field('location', $hfe_post->ID);
+		$location_lines = explode("\n", $location);
+
+		if (! empty($hfe_presenter)) {
+			$context .= " given by <b>$hfe_presenter</b>";
+		}
+
+		if (! empty($location)) {
+			$location = wp_strip_all_tags($location_lines[0], true);
+			$context .= " at <b>$location</b>";
+		}
+	}
+
 	return $context;
 }
 
