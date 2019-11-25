@@ -1,13 +1,13 @@
 <?php
 
 $contact = null;
-if (! empty($_GET['contact'])) {
+if (! empty($_GET['key'])) {
 	$contacts = get_posts(array(
 		'post_type' => 'contact',
 		'meta_query' => array(
 			array(
-				'key' => 'UUID',
-				'value' => $_GET['contact']
+				'key' => '_preferences_token',
+				'value' => $_GET['key']
 			)
 		)
 	));
@@ -24,17 +24,22 @@ acf_form_head();
 get_header();
 
 ?>
-<div class="container">
-	<?php
+<div id="join">
+	<div class="container">
+		<?php
 
-	if (empty($contact)) {
-		echo '<h2>Oops, sorry</h2>';
-		echo '<h4>Something went wrong looking up your info.</h4>';
-	} else {
+		if (empty($contact)) {
+			echo '<h2>Oops, sorry</h2>';
+			echo '<h4>Something went wrong looking up your info.</h4>';
+			echo '</div>';
+		} else {
 
-		?>
-		<h2><?php the_title(); ?></h2>
-		<?php the_content(); ?>
+			?>
+			<h2><?php the_title(); ?></h2>
+			<?php the_content(); ?>
+		</div>
+	</div>
+	<div id="preferences" class="container">
 		<?php acf_form(array(
 			'post_id' => $contact->ID,
 			'fields' => array(
