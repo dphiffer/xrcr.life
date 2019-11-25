@@ -61,6 +61,8 @@ function xrcr_update_contact($post_id) {
 		'post_title' => $post_title
 	));
 
+	xrcr_contacts_update_preferences_token($post_id);
+
 	// Ok, we should've avoided an infinite loop
 	add_action('save_post', 'xrcr_update_contact');
 
@@ -92,11 +94,19 @@ function xrcr_get_contact_score($post_id) {
 	return $score;
 }
 
+function xrcr_contacts_update_preferences_token($post_id) {
+	$preferences_token = get_post_meta($post_id, '_preferences_token', true);
+	if (empty($preferences_token)) {
+		$preferences_token = bin2hex(openssl_random_pseudo_bytes(10));
+		update_post_meta($post_id, '_preferences_token', $preferences_token);
+	}
+}
+
 function xrcr_contacts_migrate() {
 
 	global $wpdb;
 
-	$curr_version = 2;
+	$curr_version = 3;
 	$option_key = 'xrcr_contacts_migration_version';
 
 	$version = get_option($option_key, 0);
@@ -130,14 +140,26 @@ function xrcr_contacts_migrate() {
 		}
 	}
 
+	$all_contacts = get_posts(array(
+		'post_type' => 'contact',
+		'posts_per_page' => -1
+	));
+
 	if ($version < 2) {
-		$contacts = get_posts(array(
-			'post_type' => 'contact',
-			'posts_per_page' => -1
-		));
-		foreach ($contacts as $post) {
+		foreach ($all_contacts as $post) {
 			$score = xrcr_get_contact_score($post->ID);
 			update_post_meta($post->ID, '_score', $score);
+		}
+	}
+
+	if ($version < 3) {
+		if (function_exists('openssl_random_pseudo_bytes')) {
+			foreach ($all_contacts as $post) {
+				xrcr_contacts_update_preferences_token($post->ID);
+			}
+		} else {
+			echo "ERROR: enable the openssl PHP extension\n";
+			exit;
 		}
 	}
 
