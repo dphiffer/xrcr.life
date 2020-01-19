@@ -2,10 +2,12 @@
 
 if (function_exists('acf_add_options_page')) {
 	acf_add_options_page();
-}
-
-if (defined('ACF_LITE') && ACF_LITE) {
-	require_once __DIR__ . '/lib/fields.php';
+	add_filter('acf/settings/save_json', function() {
+		return __DIR__ . '/fields';
+	});
+	add_filter('acf/settings/load_json', function() {
+		return array(__DIR__ . '/fields');
+	});
 }
 
 require_once __DIR__ . '/lib/caller.php';

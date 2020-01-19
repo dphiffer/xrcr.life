@@ -106,7 +106,7 @@ function xrcr_contacts_migrate() {
 
 	global $wpdb;
 
-	$curr_version = 3;
+	$curr_version = 4;
 	$option_key = 'xrcr_contacts_migration_version';
 
 	$version = get_option($option_key, 0);
@@ -160,6 +160,19 @@ function xrcr_contacts_migrate() {
 		} else {
 			echo "ERROR: enable the openssl PHP extension\n";
 			exit;
+		}
+	}
+
+	$all_calls = get_posts(array(
+		'post_type' => 'call',
+		'posts_per_page' => -1
+	));
+
+	if ($version < 4) {
+		foreach ($all_calls as $call) {
+			$contact_id = get_field('contact', $call->ID);
+			$call_notes = get_field('caller_notes', $call->ID);
+			update_field('call_notes', $call_notes, $contact_id);
 		}
 	}
 

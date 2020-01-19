@@ -44,8 +44,7 @@ get_header();
 			'post_id' => $contact->ID,
 			'fields' => array(
 				'contact_method',
-				'contact_times',
-				'contact_misc'
+				'contact_times'
 			),
 			'submit_value' => 'Update',
 			'html_updated_message' => '<div class="feedback"><h4><i class="fa fa-check"></i> Your preferences are saved. Thank you!</h4></div>'
