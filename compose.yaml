@@ -1,0 +1,38 @@
+services:
+  web:
+    build:
+      context: ./
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_CONFIG_EXTRA: |
+        define( 'WP_DEBUG_LOG', true );
+        define( 'WP_DEBUG_DISPLAY', false );
+      COMPOSER_AUTH: |
+        {
+          "http-basic": {
+            "connect.advancedcustomfields.com": {
+              "username": "${ACF_PRO_KEY}",
+              "password": "http://localhost:8080"
+            }
+          }
+        }
+      ACF_PRO_KEY: ${ACF_PRO_KEY}
+    volumes:
+      - .:/var/www/html/wp-content/themes/xrcr
+  db:
+    image: mariadb:11.4.2
+    ports:
+      - 3306:3306
+    restart: always
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+volumes:
+  db: {}
