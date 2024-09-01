@@ -1,17 +1,38 @@
 <?php
-/**
- * Front to the WordPress application. This file doesn't do anything, but loads
- * wp-blog-header.php which does and tells WordPress to load the theme.
- *
- * @package WordPress
- */
 
-/**
- * Tells WordPress to load the WordPress theme and output it.
- *
- * @var bool
- */
-define( 'WP_USE_THEMES', true );
+if (! have_posts()) {
+	require_once '404.php';
+	return;
+}
 
-/** Loads the WordPress Environment and Template */
-require( dirname( __FILE__ ) . '/wp-blog-header.php' );
+the_post();
+get_header();
+
+get_template_part('banner');
+
+$cta_content = get_field('cta_content');
+$container_class = 'container';
+
+if (! empty($cta_content)) {
+	$container_class .= ' has-cta';
+}
+
+echo "<div class=\"$container_class\">\n";
+
+if (! empty($cta_content)) {
+	echo "<div class=\"cta\">$cta_content</div>\n";
+	echo "<div class=\"main\">\n";
+}
+
+?><h2><?php the_title(); ?></h2><?php
+the_content();
+
+if (! empty($cta_content)) {
+	echo "</div>\n";
+	echo "<br class=\"clear\">\n";
+}
+
+echo '</div>';
+
+get_template_part('join-form');
+get_footer();

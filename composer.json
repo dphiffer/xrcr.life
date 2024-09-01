@@ -1,0 +1,32 @@
+{
+	"name": "dphiffer/xrcr",
+	"description": "Extinction Rebellion Capital District website",
+	"version": "0.0.1",
+	"type": "wordpress-theme",
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://wpackagist.org"
+		},
+		{
+			"type": "composer",
+			"url": "https://connect.advancedcustomfields.com"
+		}
+	],
+	"require": {
+		"wpengine/advanced-custom-fields-pro": "^6.3"
+	},
+	"extra": {
+		"installer-paths": {
+			"../../plugins/{$name}/": [
+				"type:wordpress-plugin"
+			]
+		}
+	},
+	"config": {
+		"allow-plugins": {
+			"composer/installers": true,
+			"dphiffer/acf-pro-installer": true
+		}
+	}
+}
